@@ -1,0 +1,63 @@
+@function get-size($size) {
+	$multiplier: 1;
+
+	@if(str-slice($size, 1, 1) == "-") {
+		$multiplier: -1;
+		$size: map-get($sizes, str-slice($size, 2));
+	} @else {
+		$size: map-get($sizes, $size);
+	}
+
+	@if($size == null) {
+		$size: 0;
+	}
+
+	@return $size*$multiplier*$baseline-grid + rem;
+}
+
+@mixin margin($size) {
+	padding-left: get-size($size);
+	padding-right: get-size($size);
+}
+
+@mixin padding($size) {
+	padding: get-size($size);
+}
+
+@mixin pd($size) {
+	padding-top: get-size($size);
+	padding-bottom: get-size($size);
+}
+@mixin pd-top($size) {
+	padding-top: get-size($size);
+}
+@mixin pd-bottom($size) {
+	padding-bottom: get-size($size);
+}
+@mixin pd-left($size) {
+	padding-left: get-size($size);
+}
+@mixin pd-right($size) {
+	padding-right: get-size($size);
+}
+
+@mixin mg($size) {
+	margin-top: get-size($size);
+	margin-bottom: get-size($size);
+}
+@mixin mg-h($size) {
+	margin-left: get-size($size);
+	margin-right: get-size($size);
+}
+@mixin mg-top($size) {
+	margin-top: get-size($size);
+}
+@mixin mg-bottom($size) {
+	margin-bottom: get-size($size);
+}
+@mixin mg-left($size) {
+	margin-left: get-size($size);
+}
+@mixin mg-right($size) {
+	margin-right: get-size($size);
+}

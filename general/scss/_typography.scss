@@ -1,0 +1,104 @@
+@each $font-face in $font-faces {
+	@font-face {
+		font-family: map-get($font-face, family);
+		src: url(#{map-get($font-face, src)}.woff2) format('woff2'),
+			 url(#{map-get($font-face, src)}.woff) format('woff');
+		font-weight: map-get($weights, map-get($font-face, weight));
+		font-style: map-get($font-face, style);
+	}
+}
+
+html {
+	-webkit-text-size-adjust: none;
+}
+
+body {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+}
+
+html, body {
+	font-size: $base-font-size + px;
+	line-height: $base-line-height + rem;
+}
+
+@mixin make-typography($breakpoint: '') {
+	$target: '';
+
+	@if($breakpoint != '') {
+		$target: --#{$breakpoint};
+	}
+
+	@if($breakpoint == '') {
+		@each $family, $value in $families {
+			.ff-#{$family} {
+				font-family: unquote($value);
+			}
+		}
+	}
+
+	@if($font-sizes != null) {
+		@each $size, $value in $font-sizes {
+			.fs-#{$size}#{$target} {
+				font-size: map-get($value, font-size);
+				line-height: map-get($value, line-height);
+			}
+		}
+	} @else {
+		.fs-xs#{$target} {
+			@include font-scale(-2);
+		}
+
+		.fs-sm#{$target} {
+			@include font-scale(-1);
+		}
+
+		.fs-default#{$target} {
+			@include font-scale(0);
+		}
+
+		@for $i from 1 through 10 {
+			.fs-#{$i}#{$target} {
+				@include font-scale($i);
+			}
+		}
+	}
+
+	.fs-none#{$target} {
+		font-size: 0;
+		line-height: 0;
+	}
+
+
+	@each $weight, $value in $weights {
+		.fw-#{$weight}#{$target} {
+			font-weight: $value;
+		}
+	}
+
+	@each $value in (normal, italic) {
+		.style-#{$value}#{$target} {
+			font-style: $value;
+		}
+	}
+
+	@each $value in (none, capitalize, uppercase, lowercase) {
+		.transform-#{$value}#{$target} {
+			text-transform: $value;
+		}
+	}
+
+	@each $value in (initial, left, right, center, justify) {
+		.align-#{$value}#{$target} {
+			text-align: $value;
+		}
+	}
+}
+
+@include make-typography();
+
+@each $breakpoint, $value in $breakpoints {
+	@include media($breakpoint) {
+		@include make-typography($breakpoint);
+	}
+}

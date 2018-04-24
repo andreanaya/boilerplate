@@ -1,0 +1,23 @@
+@mixin media($breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)+px) {
+        @content;
+    }
+}
+
+@mixin tablet() {
+    @media (min-width: map-get($breakpoints, tablet)+px) {
+        @content;
+    }
+}
+
+@mixin desktop() {
+    @media (min-width: map-get($breakpoints, desktop)+px) {
+        @content;
+    }
+}
+
+@mixin wide() {
+    @media (min-width: map-get($breakpoints, wide)+px) {
+        @content;
+    }
+}

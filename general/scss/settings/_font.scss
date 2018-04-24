@@ -1,0 +1,45 @@
+@mixin font-scale($step: 0, $line-height: null) {
+	$size: 1;
+
+	@if $step > 0 {
+		@for $i from 1 through $step {
+			$size: $size * $scale-factor;
+		}
+	}
+	
+	@if($step < 0) {
+		$size: ($base-font-size + $step) / $base-font-size;
+	}
+	
+	font-size: $size + rem;
+	
+	$height: ceil($size / $base-line-height) * $base-line-height + rem;
+	
+	@if($line-height != null) {
+		$height: $line-height;
+	}
+
+	line-height: $height;
+}
+
+@mixin font-family($family) {
+	$alias: null;
+
+	@if($font-alias != null) {
+		$alias: map-get($font-alias, $family);
+	}
+
+	@if($alias == null) {
+		$alias: $family;
+	}
+
+	font-family: unquote(map-get($families, $alias));
+}
+
+@mixin font-weight($weight) {
+	font-weight: map-get($weights, $weight);
+}
+
+@mixin font-tracking($value) {
+	letter-spacing: ($value/1000) + em;
+}

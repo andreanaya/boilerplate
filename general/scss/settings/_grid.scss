@@ -1,0 +1,61 @@
+@mixin grid($gutter: null) {
+	display: block;
+	position: relative;
+	clear: both;
+	overflow: hidden;
+	margin: -1em -0.5em 0;
+
+	@if($gutter != null) {
+		@include grid-gutter($gutter);
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		position: relative;
+		clear: both;
+		width: 100%;
+	}
+}
+
+@mixin grid-cell() {
+	position: relative;
+	float: left;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	padding-top: 1em;
+}
+
+@mixin grid-span($size, $columns: $grid-columns) {
+	width: (99.99999 * $size / $columns) + %;
+}
+
+@mixin grid-constrain($size, $columns: $grid-columns) {
+	max-width: (map-get($breakpoints, desktop) * $size / $columns) + px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@mixin grid-col($size) {
+	width: (100 / $size) + %;
+}
+
+@mixin grid-offset($size, $columns: $grid-columns) {
+	margin-left: (100 * $size / $columns) + %;
+}
+
+@mixin grid-push($size, $columns: $grid-columns) {
+	left: (100 * $size / $columns) + %;
+}
+
+@mixin grid-pull($size, $columns: $grid-columns) {
+	right: (100 * $size / $columns) + %;
+}
+
+@mixin grid-overlay($size, $columns: $grid-columns) {
+	margin-left: -(100 * $size / $columns) + %;
+}
+
+@mixin grid-gutter($size) {
+	font-size: get-size($size);
+}

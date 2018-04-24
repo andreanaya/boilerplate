@@ -1,0 +1,65 @@
+@function get-color($color, $shade: null) {
+	$hex: map-get($colors, $color);
+	
+	@if($hex == null) {
+		$hex: map-get($default-colors, $color);
+	}
+
+	@if($hex == null) {
+		$hex: map-get($social-colors, $color);
+	}
+
+	@if($hex == null) {
+		$amount: map-get($shades, $color);
+		
+		@if($amount != null) {
+			$grey: floor(255 * $amount);
+			$hex: rgb($grey, $grey, $grey);
+		}
+	}
+
+	@if($hex == null) {
+		$hex: initial;
+	}
+
+	@if($shade != null) {
+		$mid: map-get($shades, mid);
+		$amount: map-get($shades, $shade);
+
+		$r: red($hex);
+		$g: green($hex);
+		$b: blue($hex);
+
+		@if($amount < $mid) {
+			$amount: ($mid - $amount)/$mid;
+
+			$r: $r*$amount;
+			$g: $g*$amount;
+			$b: $b*$amount;
+
+			$hex: rgb($r, $g, $b);
+		} @else {
+			$amount: ($amount - $mid)/(1 - $mid);
+
+			$r: $r*(1 - $amount) + 255*$amount;
+			$g: $g*(1 - $amount) + 255*$amount;
+			$b: $b*(1 - $amount) + 255*$amount;
+
+			$hex: rgb($r, $g, $b);
+		}
+	}
+
+	@return $hex;
+}
+
+@function get-shade($amount) {
+	@if($amount == 0) {
+		@return mag-get($default-colors, black);
+	} @elseif($amount == 1) {
+		@return mag-get($default-colors, white);
+	} @else {
+		$grey: floor($amount * 255);
+
+		@return rgb($grey, $grey, $grey);
+	}
+}
