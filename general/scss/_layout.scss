@@ -170,8 +170,6 @@ img, figure, pre, blockquote, hr {
 
 	@each $value in $custom-grid {
 		.columns-#{$value} > {
-			@debug $value;
-
 			@for $i from 1 through $value {
 				.span-#{$i}#{$target} {
 					@include grid-span($i, $value);
