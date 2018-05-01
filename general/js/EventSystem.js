@@ -15,7 +15,7 @@ let events = {};
 
 const subscribe = function(type, callback) {
 	if(events[type] === undefined) events[type] = [];
-	events[eventName].push(callback);
+	events[type].push(callback);
 }
 
 const unsubscribe = function(type, callback) {
