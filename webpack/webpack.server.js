@@ -6,7 +6,7 @@ module.exports = env => {
 
     return {
         entry: {
-            app: ['webpack-hot-middleware/client?overlay=false&quiet=true']
+            app: ['webpack-hot-middleware/client?overlay=false&quiet=true', './boilerplate/docs/docs.js']
         },
         devServer: {
             headers: {

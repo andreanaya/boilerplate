@@ -52,6 +52,7 @@ const removeDOMEvent = function(type) {
 
 const onBlock = function(e) {
 	if(e.eventPhase === Event.CAPTURING_PHASE) {
+		e.currentTarget.dispatchEvent(new CustomEvent('block'));
 		e.stopPropagation();
 	}
 }

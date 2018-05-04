@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Docs</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	</head>
+	<body>
+		<div class="wrapper" id="docs">
+			{{> (lookup . 'template') data}}
+		</div>
+		
+		<script src="/assets/runtime.js" defer></script>
+		<script src="/assets/vendor.js" defer></script>
+		<script src="/assets/app.js" defer></script>
+
+		<script>
+			var scripts = [
+				{
+					src: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js',
+					onload: function() {
+						[...document.querySelectorAll('pre code')].forEach(function(el) {
+							var html = el.innerHTML.trimRight().replace(/^\s*\n/gm, "");
+							;
+
+							el.innerHTML = html.replace(new RegExp(html.substr(0, /\S/.exec(html).index), 'g'), "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");;
+						});
+
+						hljs.initHighlightingOnLoad();
+					}
+				}
+			];
+
+			scripts.forEach(function(script) {
+				var el = document.createElement('script');
+				document.querySelector('body').appendChild(el);
+				el.onload = script.onload;
+				el.src = script.src;
+			});
+		</script>
+	</body>
+</html>

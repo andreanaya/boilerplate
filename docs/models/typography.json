@@ -1,0 +1,252 @@
+{
+	"title": "Typography",
+	"intro": "<p class=\"intro\">Available typography styles with their semantic meaning and usage examples.</p>",
+	"styles": [
+		{
+			"class-selector": "area-name",
+			"class-name": "Area Name",
+			"class-description": "<p>Area-name is used to identify groups where the semantic value is not part of the page content.</p><p>It can be used to identify different environments such as Premium/Admin areas, or to group content that is not part of defined hierarchy, such as Indoor/Outdoor, Rent/Buy, Premiere League/Champions League.</p><p>The area-name should be short and ideally single line. It can also have an area-subtitle for support. If necessary an area-description is available to be used, it can have any length and format from single word to multi-line text, including style modifiers such and <strong>bold</strong> and <em>italic</em>.</p>",
+			"samples": [
+				"<h2 class=\"area-name\">Area Name</h2>",
+				"<h2 class=\"area-name\">Area Name</h2><p class=\"area-subtitle\">With area-subtitle</p>",
+				"<h2 class=\"area-name\">Area Name</h2><p class=\"area-description\">With area-description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium quam libero veritatis distinctio sint, quo quod numquam aliquid, sequi, suscipit aperiam veniam eum sapiente quis saepe, aut ab dolore. Non.</p>",
+				"<h2 class=\"area-name\">Area Name</h2><p class=\"area-description\">With multi-line area-description.</p><p class=\"area-description\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium quam libero veritatis distinctio sint.</p><p class=\"area-description\">Quo quod numquam aliquid, sequi, suscipit aperiam veniam eum sapiente quis saepe, aut ab dolore. Non.</p>",
+				"<h2 class=\"area-name\">Area Name</h2><p class=\"area-subtitle\">With area-subtitle</p><p class=\"area-description\">And area-description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium quam libero veritatis distinctio sint, quo quod numquam aliquid, sequi, suscipit aperiam veniam eum sapiente quis saepe, aut ab dolore. Non.</p>",
+				"<h2 class=\"area-name\">Area Name</h2><p>Followed by regular copy. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At aperiam, necessitatibus officiis voluptas ipsam, autem veritatis ipsum architecto optio, aspernatur rem vitae quaerat maiores dignissimos pariatur unde voluptatum? Temporibus, praesentium.</p>",
+				"<h2 class=\"area-name\">Area Name</h2><p class=\"area-subtitle\">With area-subtitle</p><p>Followed by regular copy. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At aperiam, necessitatibus officiis voluptas ipsam, autem veritatis ipsum architecto optio, aspernatur rem vitae quaerat maiores dignissimos pariatur unde voluptatum? Temporibus, praesentium.</p>",
+				"<h2 class=\"area-name\">Area Name</h2><p class=\"area-subtitle\">With area-subtitle</p><p class=\"area-description\">And area-description. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium quam libero veritatis distinctio sint, quo quod numquam aliquid, sequi, suscipit aperiam veniam eum sapiente quis saepe, aut ab dolore. Non.</p><p>Followed by regular copy. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At aperiam, necessitatibus officiis voluptas ipsam, autem veritatis ipsum architecto optio, aspernatur rem vitae quaerat maiores dignissimos pariatur unde voluptatum? Temporibus, praesentium.</p>"
+			]
+		},
+
+		{
+			"class-selector": "page-title",
+			"class-name": "Page Title",
+			"class-description": "<p>Page title is used to style the current page title.</p><p>Usually the H1 tag, however it can be used in certain components such as featured content slideshows. It can take different size variants and have a subtitle.</p>",
+			"samples": [
+				"<h1>Page Title</h1>",
+				"<h1>Page Title</h1><p class=\"page-subtitle\">With page-subtitle</p>",
+				"<h1 class=\"md\">Page Title Medium</h1><p class=\"page-subtitle\">With page-subtitle</p>",
+				"<h1 class=\"sm\">Page Title Small</h1><p class=\"page-subtitle\">With page-subtitle</p>",
+				"<h1>Page Title</h1><p>Followed by regular copy. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At aperiam, necessitatibus officiis voluptas ipsam, autem veritatis ipsum architecto optio, aspernatur rem vitae quaerat maiores dignissimos pariatur unde voluptatum? Temporibus, praesentium.</p>",
+				"<h1>Page Title</h1><p class=\"page-subtitle\">With page-subtitle</p><p>Followed by regular copy. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At aperiam, necessitatibus officiis voluptas ipsam, autem veritatis ipsum architecto optio, aspernatur rem vitae quaerat maiores dignissimos pariatur unde voluptatum? Temporibus, praesentium.</p>"
+			]
+		},
+
+		{
+			"class-selector": "section-header",
+			"class-name": "Section Header",
+			"class-description": "<p>Section header is used to style the secondary headings in the page.</p><p>Usually the H2 tag, however it can be used in certain components with a different tag. It can also have a sub-header.</p>",
+			"samples": [
+				"<h2>Section Header</h2><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non nemo provident, deleniti natus tenetur nihil consequuntur eaque error officiis doloremque harum quam obcaecati, maxime asperiores iste perspiciatis nulla culpa et?</p><p>Reiciendis non, ipsum id sit, neque nobis minus nulla quibusdam delectus illo atque deleniti possimus! Eligendi vitae tenetur excepturi provident veritatis soluta blanditiis similique, amet eos, ab accusantium vel ex!</p>",
+				"<h2>Section Header</h2><p class=\"section-sub-header\">Sub header</p><p>Alias eveniet, veritatis deserunt numquam, tenetur, in cumque maxime id eos fuga esse? Nesciunt praesentium alias molestiae maiores tenetur ea tempora similique dicta, exercitationem, a facilis consequatur ex dignissimos officia?</p><p>A atque tempore ratione minima laboriosam eaque, fugiat doloremque possimus eos, natus rerum incidunt laborum laudantium accusamus magni beatae rem nisi delectus similique, saepe officia mollitia quidem eveniet? Praesentium, delectus.</p>"
+			]
+		},
+
+		{
+			"class-selector": "header",
+			"class-name": "Header",
+			"class-description": "<pHeader is used to style low hierarchy headings in the page.</p><p>Usually the H3-H6 tags, however it can be used in certain components with a different tag. It can also have a sub-header.</p>",
+			"samples": [
+				"<h3>Header</h3><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non nemo provident, deleniti natus tenetur nihil consequuntur eaque error officiis doloremque harum quam obcaecati, maxime asperiores iste perspiciatis nulla culpa et?</p><p>Reiciendis non, ipsum id sit, neque nobis minus nulla quibusdam delectus illo atque deleniti possimus! Eligendi vitae tenetur excepturi provident veritatis soluta blanditiis similique, amet eos, ab accusantium vel ex!</p>",
+				"<h3>Header</h3><p class=\"sub-header\">Sub header</p><p>Alias eveniet, veritatis deserunt numquam, tenetur, in cumque maxime id eos fuga esse? Nesciunt praesentium alias molestiae maiores tenetur ea tempora similique dicta, exercitationem, a facilis consequatur ex dignissimos officia?</p><p>A atque tempore ratione minima laboriosam eaque, fugiat doloremque possimus eos, natus rerum incidunt laborum laudantium accusamus magni beatae rem nisi delectus similique, saepe officia mollitia quidem eveniet? Praesentium, delectus.</p>",
+				"<h4>Header Small</h4><p class=\"sub-header\">Sub header</p><p>Alias eveniet, veritatis deserunt numquam, tenetur, in cumque maxime id eos fuga esse? Nesciunt praesentium alias molestiae maiores tenetur ea tempora similique dicta, exercitationem, a facilis consequatur ex dignissimos officia?</p><p>A atque tempore ratione minima laboriosam eaque, fugiat doloremque possimus eos, natus rerum incidunt laborum laudantium accusamus magni beatae rem nisi delectus similique, saepe officia mollitia quidem eveniet? Praesentium, delectus.</p>",
+				"<h5>Header Extra Small</h5><p class=\"sub-header\">Sub header</p><p>Alias eveniet, veritatis deserunt numquam, tenetur, in cumque maxime id eos fuga esse? Nesciunt praesentium alias molestiae maiores tenetur ea tempora similique dicta, exercitationem, a facilis consequatur ex dignissimos officia?</p><p>A atque tempore ratione minima laboriosam eaque, fugiat doloremque possimus eos, natus rerum incidunt laborum laudantium accusamus magni beatae rem nisi delectus similique, saepe officia mollitia quidem eveniet? Praesentium, delectus.</p>",
+				"<h6>Header Extra-Extra Small</h6><p class=\"sub-header\">Sub header</p><p>Alias eveniet, veritatis deserunt numquam, tenetur, in cumque maxime id eos fuga esse? Nesciunt praesentium alias molestiae maiores tenetur ea tempora similique dicta, exercitationem, a facilis consequatur ex dignissimos officia?</p><p>A atque tempore ratione minima laboriosam eaque, fugiat doloremque possimus eos, natus rerum incidunt laborum laudantium accusamus magni beatae rem nisi delectus similique, saepe officia mollitia quidem eveniet? Praesentium, delectus.</p>"
+			]
+		},
+
+		{
+			"class-selector": "title",
+			"class-name": "Title",
+			"class-description": "<p>Title is mostly used for informative titles.</p><p>It can be used to identify elements such as, tabs buttons, components titles, table titles, accordion headers, etc.</p>",
+			"samples": [
+				"<h2 class=\"title\">Title</h2><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>",
+				"<h2 class=\"title\">Title</h2><p class=\"subtitle\">With sub-title</p><p>Numquam quasi ullam fuga iste, incidunt omnis necessitatibus quam, ex perspiciatis cum aut? Nulla natus placeat architecto a, neque temporibus similique nobis fugit corrupti quae, nemo iusto dicta, voluptatibus, non.</p><p>Ratione, doloremque laudantium repellat atque neque dolorum eligendi beatae illo, facere quae reiciendis similique, a sapiente. Vel, nihil, veniam. Autem soluta sed ab aliquam vitae dolores sit ut laudantium, eius.</p>",
+				"<h2 class=\"title sm\">Title</h2><p class=\"subtitle\">With sub-title</p>",
+				"<h2 class=\"title xs\">Title</h2><p class=\"subtitle\">With sub-title</p>"
+			]
+		},
+
+		{
+			"class-selector": "intro",
+			"class-name": "Intro",
+			"class-description": "<p>Intro is used to style opening paragraphs. It can have multiple lines and be preceeded or followed by any other element.</p>",
+			"samples": [
+				"<p class=\"intro\">Intro paragraph. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus nemo ex vero dolorum cumque incidunt iure dolor impedit, deserunt autem labore, numquam veritatis. Cumque quod obcaecati tempore sint, porro numquam!</p><p class=\"intro\">Explicabo dolores sit optio corporis sunt iure, non eius placeat? Molestiae provident dolorem enim ipsum nam, error exercitationem facilis adipisci accusantium tempore a facere magnam est quasi delectus possimus veniam?</p><p>Followed by regular copy, quae nihil provident esse eum, consequuntur fugit temporibus dolor. Ipsam dicta reprehenderit perspiciatis omnis, voluptatibus rem vero enim illo, aperiam a, saepe voluptate ad voluptates architecto repudiandae, vel ullam placeat.</p><p>Voluptatem officiis nostrum dignissimos molestias dolorem libero aut doloribus perspiciatis! Voluptatibus quo ea dolore recusandae unde, obcaecati? Expedita aliquid totam, aperiam possimus, in quidem debitis recusandae commodi modi magni accusantium!</p>",
+				"<h1>Page Title</h1><p class=\"intro\">Intro paragraph. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus nemo ex vero dolorum cumque incidunt iure dolor impedit, deserunt autem labore, numquam veritatis. Cumque quod obcaecati tempore sint, porro numquam!</p><p class=\"intro\">Explicabo dolores sit optio corporis sunt iure, non eius placeat? Molestiae provident dolorem enim ipsum nam, error exercitationem facilis adipisci accusantium tempore a facere magnam est quasi delectus possimus veniam?</p><h2>Secondary Title</h2><p>Followed by regular copy, quae nihil provident esse eum, consequuntur fugit temporibus dolor. Ipsam dicta reprehenderit perspiciatis omnis, voluptatibus rem vero enim illo, aperiam a, saepe voluptate ad voluptates architecto repudiandae, vel ullam placeat.</p><p>Voluptatem officiis nostrum dignissimos molestias dolorem libero aut doloribus perspiciatis! Voluptatibus quo ea dolore recusandae unde, obcaecati? Expedita aliquid totam, aperiam possimus, in quidem debitis recusandae commodi modi magni accusantium!</p>"
+			]
+		},
+
+		{
+			"class-selector": "description",
+			"class-name": "Description",
+			"class-description": "<p>Description is mostly used to identify descriptive blocks of text.</p><p>It can be used on elements such as content cards, promo panels, etc.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>"
+			]
+		},
+
+		{
+			"class-selector": "info",
+			"class-name": "Info",
+			"class-description": "<p>Info is mostly used to identify informative content oustide of the page context.</p><p>It can be used on elements such as tooltips, warning messages, etc.</p>",
+			"samples": [
+				"<p>Numquam quasi ullam fuga iste, incidunt omnis necessitatibus quam, ex perspiciatis cum aut? Nulla natus placeat architecto a, neque temporibus similique nobis fugit corrupti quae, nemo iusto dicta, voluptatibus, non.</p><p>Ratione, doloremque laudantium repellat atque neque dolorum eligendi beatae illo, facere quae reiciendis similique, a sapiente. Vel, nihil, veniam. Autem soluta sed ab aliquam vitae dolores sit ut laudantium, eius.</p>"
+			]
+		},
+
+		{
+			"class-selector": "caption",
+			"class-name": "Caption",
+			"class-description": "<p>Caption is used to identify supporting text.</p><p>It can be used on figure elements, video captions, to style content references, etc.</p>",
+			"samples": [
+				"<p>Voluptate itaque doloribus, expedita optio sequi minima animi tenetur eius consectetur odio fugit velit suscipit unde laboriosam repudiandae distinctio dolor perferendis error aliquid, harum, accusamus impedit et veritatis. Dolor, vitae.</p><p>Necessitatibus quas magnam incidunt dolorem. Provident facere autem, itaque repellat excepturi deleniti eius accusantium laboriosam nihil deserunt aut. Sit quia nihil quae eaque ipsa est. Sequi animi suscipit in recusandae.</p>"
+			]
+		},
+
+		{
+			"class-selector": "quote",
+			"class-name": "Quote",
+			"class-description": "<p>Quote is used to style quotes from different authors.</p><p>Usually the Blockquote tag, but it can be used with other HTML elements.</p>",
+			"samples": [
+				"<p>Fugit ex quaerat autem alias aperiam perferendis enim nostrum, doloribus esse eligendi dolorem commodi impedit, veniam rem obcaecati dicta, quidem ducimus voluptatibus ipsa, ratione aliquid adipisci nemo iste debitis? Cum.</p><p>Non sequi optio illo et fugiat molestias voluptates hic quaerat dicta? Illum voluptatem fugiat odio, obcaecati commodi laborum placeat libero, accusantium ea excepturi, pariatur distinctio magnam exercitationem autem quis esse.</p>"
+			]
+		},
+
+		{
+			"class-selector": "breadcrumb",
+			"class-name": "Breadcrumb",
+			"class-description": "<p>Breadcrumb is used to identify content hierarchy or browsing history.</p>",
+			"samples": [
+				"<p>Incidunt magnam atque minus beatae a eius alias id tenetur modi deserunt eum, iure est eveniet vero expedita hic, asperiores pariatur rem aut vel ex facere? Sapiente deserunt culpa facere.</p><p>Neque dignissimos quaerat distinctio perspiciatis consequatur obcaecati culpa rem facilis minima, iusto repellendus aspernatur accusantium commodi iste quis delectus tempora illo dolorum odio voluptas! Dolores quisquam exercitationem aut, quia magnam!</p>"
+			]
+		},
+
+		{
+			"class-selector": "date",
+			"class-name": "Date",
+			"class-description": "<p>Used to identify content time-stamps.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>",
+				"<p>Numquam quasi ullam fuga iste, incidunt omnis necessitatibus quam, ex perspiciatis cum aut? Nulla natus placeat architecto a, neque temporibus similique nobis fugit corrupti quae, nemo iusto dicta, voluptatibus, non.</p><p>Ratione, doloremque laudantium repellat atque neque dolorum eligendi beatae illo, facere quae reiciendis similique, a sapiente. Vel, nihil, veniam. Autem soluta sed ab aliquam vitae dolores sit ut laudantium, eius.</p>"
+			]
+		},
+
+		{
+			"class-selector": "author",
+			"class-name": "Author",
+			"class-description": "<p>Used to identify the author of a content.</p><p>It can be used as a standalone element or as part of a blockquote.</p>",
+			"samples": [
+				"<p>Voluptate itaque doloribus, expedita optio sequi minima animi tenetur eius consectetur odio fugit velit suscipit unde laboriosam repudiandae distinctio dolor perferendis error aliquid, harum, accusamus impedit et veritatis. Dolor, vitae.</p><p>Necessitatibus quas magnam incidunt dolorem. Provident facere autem, itaque repellat excepturi deleniti eius accusantium laboriosam nihil deserunt aut. Sit quia nihil quae eaque ipsa est. Sequi animi suscipit in recusandae.</p>",
+				"<p>Fugit ex quaerat autem alias aperiam perferendis enim nostrum, doloribus esse eligendi dolorem commodi impedit, veniam rem obcaecati dicta, quidem ducimus voluptatibus ipsa, ratione aliquid adipisci nemo iste debitis? Cum.</p><p>Non sequi optio illo et fugiat molestias voluptates hic quaerat dicta? Illum voluptatem fugiat odio, obcaecati commodi laborum placeat libero, accusantium ea excepturi, pariatur distinctio magnam exercitationem autem quis esse.</p>"
+			]
+		},
+
+		{
+			"class-selector": "category",
+			"class-name": "Category",
+			"class-description": "<p>Used to identify content categories.</p><p>Content category is usualy the primary type of content classification.</p><p>A category can have sub-categories.</p>",
+			"samples": [
+				"<p>Fugit ex quaerat autem alias aperiam perferendis enim nostrum, doloribus esse eligendi dolorem commodi impedit, veniam rem obcaecati dicta, quidem ducimus voluptatibus ipsa, ratione aliquid adipisci nemo iste debitis? Cum.</p><p>Non sequi optio illo et fugiat molestias voluptates hic quaerat dicta? Illum voluptatem fugiat odio, obcaecati commodi laborum placeat libero, accusantium ea excepturi, pariatur distinctio magnam exercitationem autem quis esse.</p>",
+				"<p>Incidunt magnam atque minus beatae a eius alias id tenetur modi deserunt eum, iure est eveniet vero expedita hic, asperiores pariatur rem aut vel ex facere? Sapiente deserunt culpa facere.</p><p>Neque dignissimos quaerat distinctio perspiciatis consequatur obcaecati culpa rem facilis minima, iusto repellendus aspernatur accusantium commodi iste quis delectus tempora illo dolorum odio voluptas! Dolores quisquam exercitationem aut, quia magnam!</p>"
+			]
+		},
+
+		{
+			"class-selector": "tag",
+			"class-name": "Tag",
+			"class-description": "<p>Used to identify content tags.</p><p>Content tags is usualy a secondary type of classification, mainly used to create granular content relations.</p><p>All tags have the same hierarchy level.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>",
+				"<p>Incidunt magnam atque minus beatae a eius alias id tenetur modi deserunt eum, iure est eveniet vero expedita hic, asperiores pariatur rem aut vel ex facere? Sapiente deserunt culpa facere.</p><p>Neque dignissimos quaerat distinctio perspiciatis consequatur obcaecati culpa rem facilis minima, iusto repellendus aspernatur accusantium commodi iste quis delectus tempora illo dolorum odio voluptas! Dolores quisquam exercitationem aut, quia magnam!</p>"
+			]
+		},
+
+		{
+			"class-selector": "label",
+			"class-name": "Label",
+			"class-description": "<p>Label is used to identify elements within a functional context.</p><p>Most common example is to identify form elements, however it can also be used to identify other types of functionalities such as sliders, filters, etc.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>"
+			]
+		},
+
+		{
+			"class-selector": "message",
+			"class-name": "Message",
+			"class-description": "<p>Message is used to identify any kind of user feedback.</p><p>It can be an error message, validation message, response messages, notifications, etc.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>"
+			]
+		},
+
+		{
+			"class-selector": "legal",
+			"class-name": "Legal",
+			"class-description": "<p>Legal is used to identify legal content.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>",
+				"<p>Numquam quasi ullam fuga iste, incidunt omnis necessitatibus quam, ex perspiciatis cum aut? Nulla natus placeat architecto a, neque temporibus similique nobis fugit corrupti quae, nemo iusto dicta, voluptatibus, non.</p><p>Ratione, doloremque laudantium repellat atque neque dolorum eligendi beatae illo, facere quae reiciendis similique, a sapiente. Vel, nihil, veniam. Autem soluta sed ab aliquam vitae dolores sit ut laudantium, eius.</p>"
+			]
+		},
+
+		{
+			"class-selector": "copyright",
+			"class-name": "Copyright",
+			"class-description": "<p>Copyright is used to identify copyrighted content.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>",
+				"<p>Numquam quasi ullam fuga iste, incidunt omnis necessitatibus quam, ex perspiciatis cum aut? Nulla natus placeat architecto a, neque temporibus similique nobis fugit corrupti quae, nemo iusto dicta, voluptatibus, non.</p><p>Ratione, doloremque laudantium repellat atque neque dolorum eligendi beatae illo, facere quae reiciendis similique, a sapiente. Vel, nihil, veniam. Autem soluta sed ab aliquam vitae dolores sit ut laudantium, eius.</p>"
+			]
+		},
+
+		{
+			"class-selector": "list",
+			"class-name": "List",
+			"class-description": "<p>List is used to identify unordered lists. Items on this lists don't have any particular order and can be shuffled without affecting the context.</p><p>For example: list of ingredients, available colors, models, etc.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>"
+			]
+		},
+
+		{
+			"class-selector": "ordered-list",
+			"class-name": "Ordered list",
+			"class-description": "<p>Ordered list is used to identify lists where the item order is meaningful within the list context.</p><p>Some examples are: steps to follow, hierarchy lists, ranks, etc.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>"
+			]
+		},
+
+		{
+			"class-selector": "definition-list",
+			"class-name": "Definition list",
+			"class-description": "<p>Definition list is used when each item of the list needs some sort of identifier.</p><p>Some examples are: product information, contact information, etc.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>"
+			]
+		},
+
+		{
+			"class-selector": "table",
+			"class-name": "Table",
+			"class-description": "<p>Table is used to identify lists where each item is composed by multiple information fields.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>"
+			]
+		},
+
+		{
+			"class-selector": "figure",
+			"class-name": "Figure",
+			"class-description": "<p>Figure is used to style images with/without captions</p><p>It can have multiple styles such as aligment, allow text wrap around, size, etc.</p>",
+			"samples": [
+				"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae maxime quaerat ipsum sit delectus, autem dolorum, est eos consequatur similique nobis asperiores totam sint. Eum quo corporis nihil ex, fuga?</p><p>Illo earum est, maxime temporibus rem modi magnam officia, numquam quaerat minima quibusdam consectetur molestiae. Sint accusantium quaerat soluta exercitationem blanditiis. Reprehenderit quisquam aut dicta quia dolore, qui accusantium quasi.</p>",
+				"<p>Numquam quasi ullam fuga iste, incidunt omnis necessitatibus quam, ex perspiciatis cum aut? Nulla natus placeat architecto a, neque temporibus similique nobis fugit corrupti quae, nemo iusto dicta, voluptatibus, non.</p><p>Ratione, doloremque laudantium repellat atque neque dolorum eligendi beatae illo, facere quae reiciendis similique, a sapiente. Vel, nihil, veniam. Autem soluta sed ab aliquam vitae dolores sit ut laudantium, eius.</p>",
+				"<p>Voluptate itaque doloribus, expedita optio sequi minima animi tenetur eius consectetur odio fugit velit suscipit unde laboriosam repudiandae distinctio dolor perferendis error aliquid, harum, accusamus impedit et veritatis. Dolor, vitae.</p><p>Necessitatibus quas magnam incidunt dolorem. Provident facere autem, itaque repellat excepturi deleniti eius accusantium laboriosam nihil deserunt aut. Sit quia nihil quae eaque ipsa est. Sequi animi suscipit in recusandae.</p>",
+				"<p>Fugit ex quaerat autem alias aperiam perferendis enim nostrum, doloribus esse eligendi dolorem commodi impedit, veniam rem obcaecati dicta, quidem ducimus voluptatibus ipsa, ratione aliquid adipisci nemo iste debitis? Cum.</p><p>Non sequi optio illo et fugiat molestias voluptates hic quaerat dicta? Illum voluptatem fugiat odio, obcaecati commodi laborum placeat libero, accusantium ea excepturi, pariatur distinctio magnam exercitationem autem quis esse.</p>",
+				"<p>Incidunt magnam atque minus beatae a eius alias id tenetur modi deserunt eum, iure est eveniet vero expedita hic, asperiores pariatur rem aut vel ex facere? Sapiente deserunt culpa facere.</p><p>Neque dignissimos quaerat distinctio perspiciatis consequatur obcaecati culpa rem facilis minima, iusto repellendus aspernatur accusantium commodi iste quis delectus tempora illo dolorum odio voluptas! Dolores quisquam exercitationem aut, quia magnam!</p>"
+			]
+		}
+	]
+}

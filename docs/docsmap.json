@@ -1,0 +1,46 @@
+{
+	"path": "docs",
+	"basePath": "boilerplate/docs/layout/docs",
+	"meta": {},
+	"template": "boilerplate/docs/layout/views/docs/docs.hbs",
+	"data": "boilerplate/docs/models/docs.json",
+	"children": [
+		{
+			"path": "component",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/components/component.hbs",
+			"data": "boilerplate/docs/models/component.json"
+		},
+		{
+			"path": "events",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/Events.hbs",
+			"data": "boilerplate/docs/models/events.json"
+		},
+		{
+			"path": "styleguide",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/styleguide.hbs",
+			"data": "boilerplate/docs/models/styleguide.json",
+			"children": [
+				{
+					"path": "typography",
+					"basePath": "boilerplate/docs/layout/docs",
+					"meta": {},
+					"template": "boilerplate/docs/layout/views/docs/modules/typography.hbs",
+					"data": "boilerplate/docs/models/typography.json"
+				},
+				{
+					"path": "layout",
+					"basePath": "boilerplate/docs/layout/docs",
+					"meta": {},
+					"template": "boilerplate/docs/layout/views/docs/modules/layout.hbs",
+					"data": "boilerplate/docs/models/layout.json"
+				}
+			]
+		}
+	]
+}

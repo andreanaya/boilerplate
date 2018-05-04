@@ -8,7 +8,7 @@ module.exports = env => {
 
     return {
         output: {
-            filename: '[name].[chunkhash].js'
+            filename: '[name].[hash].js'
         },
         module: {
             rules: [
@@ -52,7 +52,7 @@ module.exports = env => {
         },
         plugins: [
             new ExtractTextPlugin({
-                filename: '[name].[contenthash].css',
+                filename: '[name].[hash].css',
                 allChunks: true
             }),
             new webpack.optimize.UglifyJsPlugin({

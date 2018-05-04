@@ -100,6 +100,10 @@ if(config.sitemap) {
 	}
 
 	var sitemap = JSON.parse(fs.readFileSync(config.sitemap, 'utf8'));
+	var docs = JSON.parse(fs.readFileSync('./boilerplate/docs/docsmap.json', 'utf8'));
+
+	sitemap.children.push(docs);
+	
 	var routes = [];
 	setRoute([sitemap], '');
 	

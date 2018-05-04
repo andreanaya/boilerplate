@@ -17,7 +17,6 @@ module.exports = env => {
                 'Expo',
                 'gsap/CSSPlugin',
                 'formdata-polyfill',
-                'axios',
                 './.modernizrrc'
             ]
         },
