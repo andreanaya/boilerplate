@@ -20,6 +20,13 @@
 			"data": "boilerplate/docs/models/events.json"
 		},
 		{
+			"path": "history-controller",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/HistoryController.hbs",
+			"data": "boilerplate/docs/models/history-controller.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},

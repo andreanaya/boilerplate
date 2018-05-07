@@ -108,7 +108,21 @@ if(config.sitemap) {
 	setRoute([sitemap], '');
 	
 	chokidar.watch(config.sitemap).on('change', function(path, event) {
-		sitemap = JSON.parse(fs.readFileSync(config.sitemap, 'utf8'))
+		sitemap = JSON.parse(fs.readFileSync(config.sitemap, 'utf8'));
+		docs = JSON.parse(fs.readFileSync('./boilerplate/docs/docsmap.json', 'utf8'));
+
+		sitemap.children.push(docs);
+		
+		routes = [];
+		setRoute([sitemap], '');
+	});
+
+	chokidar.watch('./boilerplate/docs/docsmap.json').on('change', function(path, event) {
+		sitemap = JSON.parse(fs.readFileSync(config.sitemap, 'utf8'));
+		docs = JSON.parse(fs.readFileSync('./boilerplate/docs/docsmap.json', 'utf8'));
+
+		sitemap.children.push(docs);
+		
 		routes = [];
 		setRoute([sitemap], '');
 	});

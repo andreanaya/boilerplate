@@ -143,7 +143,7 @@ function onClick(e) {
 		return;
 	}
 
-	navigate(href, node.dataset);
+	navigate(href, Object.assign({}, node.dataset));
 
 	e.preventDefault();
 }
