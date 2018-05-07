@@ -1,21 +1,23 @@
-import Gesture from 'boilerplate/general/js/Gesture.js';
+import Loader from 'boilerplate/general/js/Loader.js';
 
 export default class Docs {
     constructor(el) {
-		Gesture.init();
-        
-        el.enableGestures();
+		let bt1 = el.querySelector('.bg-pink');
 
-        el.addEventListener(Gesture.events.SWIPE_LEFT, function(e) {
-        	console.log('swipe left');
-        });
+		let loader = new Loader();
 
-        el.addEventListener(Gesture.events.SWIPE_RIGHT, function(e) {
-        	console.log('swipe right');
-        });
+		loader.responseType = 'blob';
 
-        el.addEventListener(Gesture.events.TAP, function(e) {
-        	console.log('tap');
-        });
+		loader.addEventListener('complete', (e) => {
+			var urlCreator = window.URL || window.webkitURL;
+			var imageUrl = urlCreator.createObjectURL(e.detail);
+			var img = document.createElement('img');
+			el.appendChild(img);
+			img.src = imageUrl;
+		});
+
+		bt1.addEventListener('click', (e) => {
+			loader.load('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST-gRkVxv_bLYBZNhkkUSLh9hmMtY6k1APQ_I5bB7fVSkMj9jd')
+		});
     }
 }
