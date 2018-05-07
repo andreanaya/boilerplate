@@ -20,6 +20,13 @@
 			"data": "boilerplate/docs/models/events.json"
 		},
 		{
+			"path": "gestures",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/Gestures.hbs",
+			"data": "boilerplate/docs/models/gestures.json"
+		},
+		{
 			"path": "history-controller",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},
