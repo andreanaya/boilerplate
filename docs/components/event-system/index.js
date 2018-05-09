@@ -1,7 +1,7 @@
 import './scss/index.scss';
 
 import {register} from 'boilerplate/general/js/Factory.js';
-import * as EventSystem from 'boilerplate/general/js/EventSystem.js';
+import {subcribe, broadcast} from 'boilerplate/general/js/EventSystem.js';
 
 export default class Docs {
     constructor(el) {
@@ -17,7 +17,7 @@ export default class Docs {
             console.log('>>>>> BLOCK!');
         }
 
-    	EventSystem.subscribe('test', function(e) {
+    	subscribe('test', function(e) {
             console.log('>>>>> Global event docs')
         });
 
@@ -34,7 +34,7 @@ export default class Docs {
         })
 
         squares[2].addEventListener('click', function(e) {
-            EventSystem.broadcast(new Event('test'));
+            broadcast(new Event('test'));
         })
 
         squares[3].addEventListener('click', function(e) {
