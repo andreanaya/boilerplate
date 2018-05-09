@@ -27,6 +27,13 @@
 			"data": "boilerplate/docs/models/loader.json"
 		},
 		{
+			"path": "scroll-controller",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/ScrollController.hbs",
+			"data": "boilerplate/docs/models/scroll-controller.json"
+		},
+		{
 			"path": "gestures",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},
