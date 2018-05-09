@@ -347,6 +347,18 @@ img, figure, pre, blockquote, hr {
 		}
 	}
 
+	@each $value in (hidden, scroll, auto, visible) {
+		.overflow-#{$value}#{$target} {
+			overflow: $value;
+		}
+		.overflow-x-#{$value}#{$target} {
+			overflow-x: $value;
+		}
+		.overflow-y-#{$value}#{$target} {
+			overflow-y: $value;
+		}
+	}
+
 	.squared#{$target} {
 		position: relative;
 

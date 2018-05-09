@@ -1,44 +1,50 @@
-var isScrolling = false, isResizing = false, scrollTop = 0, width = -1, height = -1, breakpoint;
+import {breakpoints as BREAKPOINTS} from 'config/styleguide.json';
+import {subscribe} from 'boilerplate/general/js/EventSystem.js';
 
-function setBreakpoint(b) {
-	if(breakpoint != b) {
-		breakpoint = b;
-		
-		document.body.emit(new CustomEvent('breakpoint', {
-			detail: {
-				breakpoint: breakpoint
-			}
-		}), 'children');
-	}
+let isScrolling = false, isResizing = false, scrollTop = 0, width = -1, height = -1, breakpoint;
+const breakpoints = Object.keys(BREAKPOINTS).map(key => ({breakpoint: key, value: BREAKPOINTS[key]})).sort((a, b) => (a.value - b.value));
+
+function getBreakpoint(w) {
+	let breakpoint = 'mobile';
+
+	breakpoints.forEach((item) => {
+		if(w > item.value) {
+			breakpoint = item.breakpoint;
+		}
+	});
+
+	return breakpoint;
 }
 
 function resize() {
 	isResizing = false;
 
-	var w = window.innerWidth;
-	var h = window.innerHeight;
+	let w = window.innerWidth;
+	let h = window.innerHeight;
 
 	if(height != h) {
 		height = h;
-		document.body.emit(new CustomEvent('hResize'), 'children');
+		document.body.emit(new CustomEvent('hResize'));
 	}
 
 	if(width != w) {
 		width = w;
-		document.body.emit(new CustomEvent('wResize'), 'children');
+		document.body.emit(new CustomEvent('wResize'));
 
-		if(w<768) {
-			setBreakpoint('mobile');
-		} else if(w<1024) {
-			setBreakpoint('tablet');
-		} else if(w<1440) {
-			setBreakpoint('desktop');
-		} else {
-			setBreakpoint('wide');
+		let b = getBreakpoint(w);
+
+		if(breakpoint != b) {
+			breakpoint = b;
+			
+			document.body.emit(new CustomEvent('breakpoint', {
+				detail: {
+					breakpoint: breakpoint
+				}
+			}));
 		}
 	}
 
-	document.body.emit(new CustomEvent('resize'), 'children');
+	document.body.emit(new CustomEvent('resize'));
 }
 
 function scroll() {
@@ -48,7 +54,7 @@ function scroll() {
 		detail: {
 			speed: pageYOffset-scrollTop
 		}
-	}), 'children');
+	}));
 
 	scrollTop = pageYOffset;
 }
@@ -67,25 +73,13 @@ function onResize(e) {
 	}
 }
 
-function init() {
-	var w = window.innerWidth;
+subscribe('app:init', () => {
+	let w = window.innerWidth;
 
-	if(w<768) {
-		breakpoint = 'mobile';
-	} else if(w<1024) {
-		breakpoint = 'tablet';
-	} else if(w<1440) {
-		breakpoint = 'desktop';
-	} else {
-		breakpoint = 'wide';
-	}
+	breakpoint = getBreakpoint(w);
 
 	width = w;
 
 	window.addEventListener('resize', onResize);
 	window.addEventListener('scroll', onScroll);
-}
-
-module.exports = {
-	init: init
-}
+});

@@ -1,6 +1,7 @@
 import './scss/index.scss';
 
-import EventSystem from 'boilerplate/general/js/EventSystem.js';
+import {register} from 'boilerplate/general/js/Factory.js';
+import * as EventSystem from 'boilerplate/general/js/EventSystem.js';
 
 export default class Docs {
     constructor(el) {
@@ -8,12 +9,12 @@ export default class Docs {
         let blockers = document.querySelectorAll('.bg-pink');
 
         const onTest = function(e) {
-            // console.log('>>>>> test docs');
+            console.log('>>>>> test docs');
         }
 
         const onBlock = function(e) {
             e.target.classList.add('block');
-            // console.log('>>>>> BLOCK!');
+            console.log('>>>>> BLOCK!');
         }
 
     	EventSystem.subscribe('test', function(e) {
@@ -56,3 +57,5 @@ export default class Docs {
         })
     }
 }
+
+register('docs-event-system', Docs);

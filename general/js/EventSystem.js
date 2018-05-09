@@ -13,16 +13,16 @@ if ( typeof window.CustomEvent === "undefined" ) {
 
 let events = {};
 
-const subscribe = function(type, callback) {
+export const subscribe = function(type, callback) {
 	if(events[type] === undefined) events[type] = [];
 	events[type].push(callback);
 }
 
-const unsubscribe = function(type, callback) {
+export const unsubscribe = function(type, callback) {
 	events[type] = events[type].filter( cb => cb !== callback );
 }
 
-const broadcast = function(event) {
+export const broadcast = function(event) {
 	if(events[event.type]) {
 		events[event.type].forEach(callback => callback(event) );
 	}
@@ -102,5 +102,3 @@ Element.prototype.emit = function(event) {
 }
 
 Element.prototype.broadcast = broadcast;
-
-export default {subscribe, unsubscribe, broadcast};

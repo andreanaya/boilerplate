@@ -4,7 +4,7 @@ var map = new WeakMap(),
 const	SWIPE_DURATION = 150,
 		SWIPE_DISTANCE = 10;
 
-const events = {
+export const events = {
 	TAP: 'onTap',
 	TOUCH_START: 'onTouchStart',
 	TOUCH_END: 'onTouchEnd',
@@ -16,20 +16,6 @@ const events = {
 	PINCH_END: 'onPinchEnd',
 	CANCEL: 'onCancel'
 };
-
-function init() {
-	Element.prototype.enableGestures = function() {
-		if('ontouchstart' in window) {
-			this.addEventListener("touchstart", onTouchStart);
-			map.set(this, true);
-		}
-	}
-	
-	Element.prototype.disableGestures = function() {
-		this.removeEventListener("touchstart", onTouchStart);
-		map.delete(this);
-	}
-}
 
 function onTouchStart(e) {
 	if(isTouching) return;
@@ -244,4 +230,16 @@ function onTouchStart(e) {
 	}
 }
 
-export default {init, events}
+export function init() {
+	Element.prototype.enableGestures = function() {
+		if('ontouchstart' in window) {
+			this.addEventListener("touchstart", onTouchStart);
+			map.set(this, true);
+		}
+	}
+	
+	Element.prototype.disableGestures = function() {
+		this.removeEventListener("touchstart", onTouchStart);
+		map.delete(this);
+	}
+}

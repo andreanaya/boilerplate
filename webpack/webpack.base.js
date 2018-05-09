@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const fs = require('fs');
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
@@ -44,6 +45,7 @@ module.exports = env => {
                     '../general/scss/settings/index.scss'
                 ),
                 boilerplate: path.resolve(__dirname, '../'),
+                config: path.resolve(__dirname, '../../config/'),
                 TweenLite: 'gsap/TweenLite',
                 Expo: 'gsap/EasePack'
             }
@@ -91,10 +93,6 @@ module.exports = env => {
                     options: {
                         symbolId: 'icon-[name]_[folder]'
                     }
-                },
-                {
-                    test: /\.json$/,
-                    loader: 'json-loader'
                 },
                 {
                     test: /\.glsl$/,
