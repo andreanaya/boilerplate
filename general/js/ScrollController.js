@@ -1,37 +1,47 @@
-var map = new WeakMap(), init = false, current;
+import {subscribe} from 'boilerplate/general/js/EventSystem.js';
 
-function Bounds(el) {
-	var top = el.offsetTop;
-	var left = el.offsetLeft;
-	var width = el.offsetWidth;
-	var height = el.offsetHeight;
+var map = new WeakMap(), current;
 
-	var parent = el.parentNode;
+class Bounds {
+	constructor(el) {
+		var top = el.offsetTop;
+		var left = el.offsetLeft;
+		var width = el.offsetWidth;
+		var height = el.offsetHeight;
 
-	while(parent != document.body) {
-		top += parent.offsetTop;
-		left += parent.offsetLeft;
+		var parent = el.parentNode;
 
-		parent = parent.parentNode;
+		while(parent != document.body) {
+			top += parent.offsetTop;
+			left += parent.offsetLeft;
+
+			parent = parent.parentNode;
+		}
+
+		this.top = top;
+		this.bottom = top+height;
+		this.left = left;
+		this.right = left+width;
+		this.width = width;
+		this.height = height;
+
+		this.onScreen = pageYOffset < this.bottom && this.top < pageYOffset+window.innerHeight;
 	}
-
-	this.top = top;
-	this.bottom = top+height;
-	this.left = left;
-	this.right = left+width;
-	this.width = width;
-	this.height = height;
-
-	this.onScreen = pageYOffset < this.bottom && this.top < pageYOffset+window.innerHeight;
 }
 
-function lock() {
+var style = document.createElement("style");
+style.appendChild(document.createTextNode(""));
+document.head.appendChild(style);
+
+style.sheet.insertRule(".is-locked { overflow: hidden; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }", 0);
+
+Element.prototype.lock = function() {
 	var scrollTop = pageYOffset;
 	this.classList.add('is-locked');
 	this.scrollTop = scrollTop;
 }
 
-function unlock() {
+Element.prototype.unlock = function() {
 	if(current && current !== this) {
 		current.lock();
 	}
@@ -45,18 +55,14 @@ function unlock() {
 	current = this;
 }
 
-function track() {
+Element.prototype.track = function() {
 	if(map.has(this)) return;
 	
-	map.set(this, new Bounds(this))
-
 	this.subscribe('resize', onResize);
 	this.subscribe('scroll', onScroll);
 }
 
-function untrack() {
-	if(map.has(this)) return;
-	
+Element.prototype.untrack = function() {
 	map.delete(this);
 
 	this.unsubscribe('resize', onResize);
@@ -94,27 +100,14 @@ function setPosition() {
 }
 
 function onScroll(e) {
+	if(!map.has(this)) map.set(this, new Bounds(this));
+	
 	checkPosition.call(this, pageYOffset, pageYOffset+window.innerHeight, e.detail.speed);
 }
 
 function onResize(e) {
+	if(!map.has(this)) map.set(this, new Bounds(this));
+
 	setPosition.call(this);
 	checkPosition.call(this, pageYOffset, pageYOffset+window.innerHeight, 0);
-}
-
-module.exports = {
-	init: function() {
-		if(init) return;
-
-		var style = document.createElement("style");
-		style.appendChild(document.createTextNode(""));
-		document.head.appendChild(style);
-
-		style.sheet.insertRule(".is-locked { overflow: hidden; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }", 0);
-
-		Element.prototype.lock = lock;
-		Element.prototype.unlock = unlock;
-		Element.prototype.track = track;
-		Element.prototype.untrack = untrack;
-	}
 }

@@ -1,4 +1,4 @@
-function setCookie(name, value, expiration) {
+export function set(name, value, expiration) {
 	expiration = expiration || 100;
 
 	var date = new Date();
@@ -10,7 +10,7 @@ function setCookie(name, value, expiration) {
 	document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
-function getCookie(name) {
+export function get(name) {
 	name = name + "=";
     
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -27,17 +27,10 @@ function getCookie(name) {
     return "";
 }
 
-function hasCookie(name) {
+export function has(name) {
 	return getCookie(name) != "";
 }
 
-function deleteCookie(name) {
+export function delete(name) {
 	document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-}
-
-export default {
-	set: setCookie,
-	get: getCookie,
-	has: hasCookie,
-	delete: deleteCookie,
 }

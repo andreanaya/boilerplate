@@ -1,9 +1,6 @@
-import ScrollController from 'boilerplate/general/js/ScrollController.js';
-
 export default class Docs {
     constructor(el) {
-		ScrollController.init();
-        console.log('ok')
+		console.log('ok')
         
         var square = el.querySelector('.bg-green');
 

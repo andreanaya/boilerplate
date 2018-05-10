@@ -16,8 +16,10 @@ module.exports = env => {
                 'babel-polyfill',
                 'TweenLite',
                 'Expo',
+                'handlebars/runtime',
                 'gsap/CSSPlugin',
                 'formdata-polyfill',
+                'object-fit-images',
                 './.modernizrrc'
             ]
         },

@@ -1,8 +1,8 @@
-import EventSystem from 'boilerplate/general/js/EventSystem.js';
+import {broadcast} from 'boilerplate/general/js/EventSystem.js';
 
 let path, params, parentRoute, queryString;
 
-function init(auto) {
+export function init(auto) {
 	if(auto) document.body.addEventListener('click', onClick);
 
 	let route = setState();
@@ -39,7 +39,7 @@ function init(auto) {
 
 }
 
-function navigate(location, data, silent) {
+export function navigate(location, data, silent) {
 	data = data || {};
 
 	let route = setRoute(location);
@@ -61,7 +61,7 @@ function navigate(location, data, silent) {
 	onChange(route, state);
 }
 
-function replace(location, data) {
+export function replace(location, data) {
 	data = data || {};
 
 	let route = setRoute(location);
@@ -73,15 +73,15 @@ function replace(location, data) {
 	}, null, route);
 }
 
-function back() {
+export function back() {
 	window.history.back();
 }
 
-function forward() {
+export function forward() {
 	window.history.forward();
 }
 
-function getRoute() {
+export function getRoute() {
 	let route = '/';
 
 	route += path.join('/');
@@ -99,15 +99,15 @@ function getRoute() {
 	return route;
 }
 
-function getPath() {
+export function getPath() {
 	return path;
 }
 
-function getParams() {
+export function getParams() {
 	return params;
 }
 
-function getState() {
+export function getState() {
 	return history.state;
 }
 
@@ -190,10 +190,8 @@ function setRoute(href) {
 }
 
 function onChange(route, state) {
-	EventSystem.broadcast(new CustomEvent('history:change', {detail: {
+	broadcast(new CustomEvent('history:change', {detail: {
 		route: route,
 		state:state
 	}}));
 }
-
-export default {init, navigate, replace, back, forward, getRoute, getPath, getParams, getState}

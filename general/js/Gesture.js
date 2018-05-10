@@ -57,7 +57,7 @@ function onTouchStart(e) {
 		if(e.defaultPrevented) defaultPrevented = true;
 
 		var onTouchMove = function(e) {
-			touch = touch = e.touches && e.touches.length > 0 ? e.touches[0] : false;
+			touch = e.touches && e.touches.length > 0 ? e.touches[0] : false;
 
 			if(!touch) return;
 
