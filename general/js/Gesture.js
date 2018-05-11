@@ -20,32 +20,32 @@ const events = {
 function onTouchStart(e) {
 	if(isTouching) return;
 
-	var touch = e.touches && e.touches.length > 0 ? e.touches[0] : false;
+	let touch = e.touches && e.touches.length > 0 ? e.touches[0] : false;
 
 	if(!touch) return;
 
-	var target = e.target;
+	let target = e.target;
 
-	var context, pinch;
+	let el;
 
 	while(target) {
 		if(map.has(target)) {
-			context = target;
+			el = target;
 			break;
 		}
 		
 		target = target.parentNode;
 	}
 
-	if(context) {
+	if(el) {
 		isTouching = true;
 
-		var defaultPrevented,
+		let defaultPrevented,
 			timestamp = Date.now(),
 			anchorX = touch.screenX,
 			anchorY = touch.screenY;
 
-		context.dispatchEvent(new CustomEvent(events.TOUCH_START, {
+		el.dispatchEvent(new CustomEvent(events.TOUCH_START, {
 			detail: {
 				clientX: touch.clientX,
 				clientY: touch.clientY,
@@ -56,178 +56,188 @@ function onTouchStart(e) {
 
 		if(e.defaultPrevented) defaultPrevented = true;
 
-		var onTouchMove = function(e) {
-			touch = e.touches && e.touches.length > 0 ? e.touches[0] : false;
+		let context = {
+			el: el,
+			touch: touch,
+			defaultPrevented: defaultPrevented,
+			timestamp: timestamp,
+			anchorX: anchorX,
+			anchorY: anchorY,
+			pinch: undefined
+		};
 
-			if(!touch) return;
-
-			if(pinch === undefined && e.touches.length > 1) {
-				var dx = e.touches[1].screenX - e.touches[0].screenX;
-				var dy = e.touches[1].screenY - e.touches[0].screenY;
-
-				pinch = {
-					distance: Math.sqrt( dx*dx + dy*dy ),
-					angle: Math.atan2(dy, dx),
-					zoom: 1,
-					rotation: 0,
-					clientX: e.touches[0].clientX,
-					clientY: e.touches[0].clientY,
-					screenX: e.touches[0].screenX,
-					screenY: e.touches[0].screenY
-				}
-
-				context.dispatchEvent(new CustomEvent(events.PINCH_START, {
-					detail: {
-						zoom: pinch.zoom,
-						rotation: pinch.rotation,
-						clientX: pinch.clientX,
-						clientY: pinch.clientY,
-						screenX: pinch.screenX,
-						screenY: pinch.screenY
-					}
-				}));
-			}
-			else if(pinch) {
-				var dx = e.touches[1].screenX - e.touches[0].screenX;
-				var dy = e.touches[1].screenY - e.touches[0].screenY;
-
-				pinch.zoom = Math.sqrt( dx*dx + dy*dy )/pinch.distance;
-				pinch.rotation = Math.atan2(dy, dx)-pinch.angle;
-				pinch.clientX = e.touches[0].clientX;
-				pinch.clientY = e.touches[0].clientY;
-				pinch.screenX = e.touches[0].screenX;
-				pinch.screenY = e.touches[0].screenY;
-
-				context.dispatchEvent(new CustomEvent(events.PINCH_MOVE, {
-					detail: {
-						zoom: pinch.zoom,
-						rotation: pinch.rotation,
-						clientX: pinch.clientX,
-						clientY: pinch.clientY,
-						screenX: pinch.screenX,
-						screenY: pinch.screenY
-					}
-				}));
-			}
-
-			if(defaultPrevented === undefined) {
-				defaultPrevented = Math.abs(anchorX-touch.screenX) > Math.abs(anchorY-touch.screenY);
-			}
-
-			if(defaultPrevented) {
-				context.dispatchEvent(new CustomEvent(events.TOUCH_MOVE, {
-					detail: {
-						clientX: touch.clientX,
-						clientY: touch.clientY,
-						screenX: touch.screenX,
-						screenY: touch.screenY
-					}
-				}));
-
-				e.preventDefault();
-			} else {
-				isTouching = false;
-				
-				window.removeEventListener('touchmove', onTouchMove);
-				window.removeEventListener('touchend', onTouchEnd);
-
-				context.dispatchEvent(new CustomEvent(events.CANCEL));
-			}
-		}
-
-		var onTouchEnd = function(e) {
-			if(e.touches.length < 2 && pinch) {
-				if(e.touches.length == 1) {
-					touch = e.touches[0];
-				}
-
-				context.dispatchEvent(new CustomEvent(events.PINCH_END, {
-					detail: {
-						zoom: pinch.zoom,
-						rotation: pinch.rotation,
-						clientX: pinch.clientX,
-						clientY: pinch.clientY,
-						screenX: pinch.screenX,
-						screenY: pinch.screenY,
-						touch: touch
-					}
-				}));
-
-				pinch = undefined;
-			}
-
-			if(e.touches.length > 0) return;
-
-			if(defaultPrevented == undefined) {
-				var isTap = (Math.sqrt(Math.pow(touch.screenX - anchorX, 2) + Math.pow(touch.screenY - anchorY, 2)) < SWIPE_DISTANCE);
-
-				if(Math.sqrt(Math.pow(touch.screenX - anchorX, 2) + Math.pow(touch.screenY - anchorY, 2)) < SWIPE_DISTANCE) {
-					context.dispatchEvent(new CustomEvent(events.TAP, {
-						detail: {
-							clientX: touch.clientX,
-							clientY: touch.clientY,
-							screenX: touch.screenX,
-							screenY: touch.screenY
-						}
-					}));
-				}
-			}
-			else if(defaultPrevented){
-				if(Date.now()-timestamp < SWIPE_DURATION) {
-					var distance = touch.screenX-anchorX;
-
-					if(distance > SWIPE_DISTANCE) {
-						context.dispatchEvent(new CustomEvent(events.SWIPE_RIGHT, {
-							detail: {
-								clientX: touch.clientX,
-								clientY: touch.clientY,
-								screenX: touch.screenX,
-								screenY: touch.screenY
-							}
-						}));
-					}
-					else if(distance < -SWIPE_DISTANCE) {
-						context.dispatchEvent(new CustomEvent(events.SWIPE_LEFT, {
-							detail: {
-								clientX: touch.clientX,
-								clientY: touch.clientY,
-								screenX: touch.screenX,
-								screenY: touch.screenY
-							}
-						}));
-					}
-					else {
-						context.dispatchEvent(new CustomEvent(events.TAP, {
-							detail: {
-								clientX: touch.clientX,
-								clientY: touch.clientY,
-								screenX: touch.screenX,
-								screenY: touch.screenY
-							}
-						}));
-					}
-				}
-				else {
-					context.dispatchEvent(new CustomEvent(events.TOUCH_END, {
-						detail: {
-							clientX: touch.clientX,
-							clientY: touch.clientY,
-							screenX: touch.screenX,
-							screenY: touch.screenY
-						}
-					}, true));
-				}
-			}
-
-			isTouching = false;
-
-			window.removeEventListener('touchmove', onTouchMove);
-			window.removeEventListener('touchend', onTouchEnd);
-		}
-
-		window.addEventListener('touchmove', onTouchMove, {passive: false});
-		window.addEventListener('touchend', onTouchEnd, {passive: false});
+		window.addEventListener('touchmove', context.onTouchMove = onTouchMove.bind(context), {passive: false});
+		window.addEventListener('touchend', context.onTouchEnd = onTouchEnd.bind(context), {passive: false});
 	}
+}
+
+function onTouchMove(e) {
+	this.touch = e.touches && e.touches.length > 0 ? e.touches[0] : false;
+
+	if(!this.touch) return;
+
+	if(this.pinch === undefined && e.touches.length > 1) {
+		let dx = e.touches[1].screenX - e.touches[0].screenX;
+		let dy = e.touches[1].screenY - e.touches[0].screenY;
+
+		this.pinch = {
+			distance: Math.sqrt( dx*dx + dy*dy ),
+			angle: Math.atan2(dy, dx),
+			zoom: 1,
+			rotation: 0,
+			clientX: e.touches[0].clientX,
+			clientY: e.touches[0].clientY,
+			screenX: e.touches[0].screenX,
+			screenY: e.touches[0].screenY
+		}
+
+		this.el.dispatchEvent(new CustomEvent(events.PINCH_START, {
+			detail: {
+				zoom: this.pinch.zoom,
+				rotation: this.pinch.rotation,
+				clientX: this.pinch.clientX,
+				clientY: this.pinch.clientY,
+				screenX: this.pinch.screenX,
+				screenY: this.pinch.screenY
+			}
+		}));
+	}
+	else if(this.pinch) {
+		let dx = e.touches[1].screenX - e.touches[0].screenX;
+		let dy = e.touches[1].screenY - e.touches[0].screenY;
+
+		this.pinch.zoom = Math.sqrt( dx*dx + dy*dy )/this.pinch.distance;
+		this.pinch.rotation = Math.atan2(dy, dx)-this.pinch.angle;
+		this.pinch.clientX = e.touches[0].clientX;
+		this.pinch.clientY = e.touches[0].clientY;
+		this.pinch.screenX = e.touches[0].screenX;
+		this.pinch.screenY = e.touches[0].screenY;
+
+		this.el.dispatchEvent(new CustomEvent(events.PINCH_MOVE, {
+			detail: {
+				zoom: this.pinch.zoom,
+				rotation: this.pinch.rotation,
+				clientX: this.pinch.clientX,
+				clientY: this.pinch.clientY,
+				screenX: this.pinch.screenX,
+				screenY: this.pinch.screenY
+			}
+		}));
+	}
+
+	if(this.defaultPrevented === undefined) {
+		this.defaultPrevented = Math.abs(this.anchorX-this.touch.screenX) > Math.abs(this.anchorY-this.touch.screenY);
+	}
+
+	if(this.defaultPrevented) {
+		this.el.dispatchEvent(new CustomEvent(events.TOUCH_MOVE, {
+			detail: {
+				clientX: this.touch.clientX,
+				clientY: this.touch.clientY,
+				screenX: this.touch.screenX,
+				screenY: this.touch.screenY
+			}
+		}));
+
+		e.preventDefault();
+	} else {
+		isTouching = false;
+		
+		window.removeEventListener('touchmove', this.onTouchMove);
+		window.removeEventListener('touchend', this.onTouchEnd);
+
+		this.el.dispatchEvent(new CustomEvent(events.CANCEL));
+	}
+}
+
+function onTouchEnd(e) {
+	if(e.touches.length < 2 && this.pinch) {
+		if(e.touches.length == 1) {
+			this.touch = e.touches[0];
+		}
+
+		this.el.dispatchEvent(new CustomEvent(events.PINCH_END, {
+			detail: {
+				zoom: this.pinch.zoom,
+				rotation: this.pinch.rotation,
+				clientX: this.pinch.clientX,
+				clientY: this.pinch.clientY,
+				screenX: this.pinch.screenX,
+				screenY: this.pinch.screenY,
+				touch: this.touch
+			}
+		}));
+
+		this.pinch = undefined;
+	}
+
+	if(e.touches.length > 0) return;
+
+	if(this.defaultPrevented == undefined) {
+		let isTap = (Math.sqrt(Math.pow(this.touch.screenX - this.anchorX, 2) + Math.pow(this.touch.screenY - this.anchorY, 2)) < SWIPE_DISTANCE);
+
+		if(Math.sqrt(Math.pow(this.touch.screenX - this.anchorX, 2) + Math.pow(this.touch.screenY - this.anchorY, 2)) < SWIPE_DISTANCE) {
+			this.el.dispatchEvent(new CustomEvent(events.TAP, {
+				detail: {
+					clientX: this.touch.clientX,
+					clientY: this.touch.clientY,
+					screenX: this.touch.screenX,
+					screenY: this.touch.screenY
+				}
+			}));
+		}
+	}
+	else if(this.defaultPrevented){
+		if(Date.now()-this.timestamp < SWIPE_DURATION) {
+			let distance = this.touch.screenX-this.anchorX;
+
+			if(distance > SWIPE_DISTANCE) {
+				this.el.dispatchEvent(new CustomEvent(events.SWIPE_RIGHT, {
+					detail: {
+						clientX: this.touch.clientX,
+						clientY: this.touch.clientY,
+						screenX: this.touch.screenX,
+						screenY: this.touch.screenY
+					}
+				}));
+			}
+			else if(distance < -SWIPE_DISTANCE) {
+				this.el.dispatchEvent(new CustomEvent(events.SWIPE_LEFT, {
+					detail: {
+						clientX: this.touch.clientX,
+						clientY: this.touch.clientY,
+						screenX: this.touch.screenX,
+						screenY: this.touch.screenY
+					}
+				}));
+			}
+			else {
+				this.el.dispatchEvent(new CustomEvent(events.TAP, {
+					detail: {
+						clientX: this.touch.clientX,
+						clientY: this.touch.clientY,
+						screenX: this.touch.screenX,
+						screenY: this.touch.screenY
+					}
+				}));
+			}
+		}
+		else {
+			this.el.dispatchEvent(new CustomEvent(events.TOUCH_END, {
+				detail: {
+					clientX: this.touch.clientX,
+					clientY: this.touch.clientY,
+					screenX: this.touch.screenX,
+					screenY: this.touch.screenY
+				}
+			}, true));
+		}
+	}
+
+	isTouching = false;
+
+	window.removeEventListener('touchmove', this.onTouchMove);
+	window.removeEventListener('touchend', this.onTouchEnd);
 }
 
 Element.prototype.enableGestures = function() {
