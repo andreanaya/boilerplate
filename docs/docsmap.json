@@ -69,6 +69,13 @@
 			"data": "boilerplate/docs/models/slideshow.json"
 		},
 		{
+			"path": "sticky-content",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/StickyElement.hbs",
+			"data": "boilerplate/docs/models/sticky-element.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},

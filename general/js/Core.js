@@ -10,5 +10,5 @@ import 'boilerplate/general/js/ScrollController.js';
 export function init() {
 	setTimeout(function() {
 		broadcast(new CustomEvent('app:init'));
-	}, 10);
+	}, 100);
 }

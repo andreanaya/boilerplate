@@ -11,3 +11,4 @@ import './components/scroll-controller';
 import 'boilerplate/components/accordion';
 import 'boilerplate/components/tabs';
 import 'boilerplate/components/slideshow';
+import 'boilerplate/components/sticky-element';
