@@ -7,6 +7,7 @@ export default class Accordion {
 		if(button === undefined) return;
 
 		this.el = el;
+		this.el.block('app:show');
 
 		this.content = this.el.querySelector('[data-content]');
 		this.button = button;
@@ -22,6 +23,10 @@ function onClick(e) {
 	e.stopPropagation();
 
 	this.el.classList.toggle('is-open');
+
+	if(this.el.classList.contains('is-open')) {
+		this.el.emit(new CustomEvent('app:show'));
+	}
 
 	if(this.group && this.group !== '') {
 		var group = document.querySelectorAll('[data-component=accordion][data-group='+this.group+']');

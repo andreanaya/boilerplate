@@ -83,6 +83,13 @@
 			"data": "boilerplate/docs/models/side-panel.json"
 		},
 		{
+			"path": "lazy-image",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/LazyImage.hbs",
+			"data": "boilerplate/docs/models/lazy-image.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},

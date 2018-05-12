@@ -1,7 +1,7 @@
 import './scss/index.scss';
 
 import {register} from 'boilerplate/general/js/Factory.js';
-import {subcribe, broadcast} from 'boilerplate/general/js/EventSystem.js';
+import {subscribe, broadcast} from 'boilerplate/general/js/EventSystem.js';
 
 export default class Docs {
     constructor(el) {
