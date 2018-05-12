@@ -55,6 +55,13 @@
 			"data": "boilerplate/docs/models/tabs.json"
 		},
 		{
+			"path": "accordion",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/Accordion.hbs",
+			"data": "boilerplate/docs/models/accordion.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},
