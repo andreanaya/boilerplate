@@ -1,3 +1,4 @@
+import {register} from 'boilerplate/general/js/Factory.js';
 import Loader from 'boilerplate/general/js/Loader.js';
 
 export default class Docs {
@@ -21,3 +22,5 @@ export default class Docs {
         });
     }
 }
+
+register('docs-loader', Docs);

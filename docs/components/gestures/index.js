@@ -1,3 +1,4 @@
+import {register} from 'boilerplate/general/js/Factory.js';
 import Gesture from 'boilerplate/general/js/Gesture.js';
 
 export default class Docs {
@@ -29,3 +30,5 @@ export default class Docs {
         });
     }
 }
+
+register('docs-gestures', Docs);

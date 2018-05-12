@@ -1,13 +1,18 @@
+import {register} from 'boilerplate/general/js/Factory.js';
+
 import './scss/index.scss';
 
-import HistoryController from 'boilerplate/general/js/HistoryController.js';
+import {init} from 'boilerplate/general/js/HistoryController.js';
 
 export default class Docs {
     constructor(el) {
-        HistoryController.init(true);
+        init(true);
 
         el.subscribe('history:change', function(e) {
         	console.log(e);
         })
     }
 }
+
+
+register('docs-history-controller', Docs);

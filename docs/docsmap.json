@@ -48,6 +48,13 @@
 			"data": "boilerplate/docs/models/history-controller.json"
 		},
 		{
+			"path": "tabs",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/Tabs.hbs",
+			"data": "boilerplate/docs/models/tabs.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},

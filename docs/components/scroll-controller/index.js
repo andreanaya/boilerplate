@@ -1,3 +1,5 @@
+import {register} from 'boilerplate/general/js/Factory.js';
+
 export default class Docs {
     constructor(el) {
 		console.log('ok')
@@ -30,3 +32,5 @@ export default class Docs {
         })
     }
 }
+
+register('docs-scroll-controller', Docs);
