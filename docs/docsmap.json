@@ -90,6 +90,13 @@
 			"data": "boilerplate/docs/models/lazy-image.json"
 		},
 		{
+			"path": "horizontal-scroll",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/HorizontalScroll.hbs",
+			"data": "boilerplate/docs/models/horizontal-scroll.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},
