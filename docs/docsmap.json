@@ -76,6 +76,13 @@
 			"data": "boilerplate/docs/models/sticky-element.json"
 		},
 		{
+			"path": "side-panel",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/SidePanel.hbs",
+			"data": "boilerplate/docs/models/side-panel.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},

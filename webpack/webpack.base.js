@@ -14,10 +14,8 @@ module.exports = env => {
             app: ['./app'],
             vendor: [
                 'babel-polyfill',
-                'TweenLite',
-                'Expo',
                 'handlebars/runtime',
-                'gsap/CSSPlugin',
+                'gsap',
                 'formdata-polyfill',
                 'object-fit-images',
                 './.modernizrrc'
