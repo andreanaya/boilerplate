@@ -240,6 +240,10 @@ function onTouchEnd(e) {
 	window.removeEventListener('touchend', this.onTouchEnd);
 }
 
+export function hasGestures(el) {
+	return map.has(el);
+}
+
 Element.prototype.enableGestures = function() {
 	if('ontouchstart' in window) {
 		this.addEventListener("touchstart", onTouchStart);

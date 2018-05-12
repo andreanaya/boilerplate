@@ -10,3 +10,4 @@ import './components/scroll-controller';
 //Components
 import 'boilerplate/components/accordion';
 import 'boilerplate/components/tabs';
+import 'boilerplate/components/slideshow';

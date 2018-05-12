@@ -12,7 +12,7 @@ export default class Accordion {
 		this.button = button;
 
 		this.group = el.dataset.group;
-		console.log(this.group)
+		
 		button.addEventListener('click', this.onClick = onClick.bind(this));
 	}
 }

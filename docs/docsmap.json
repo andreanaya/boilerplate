@@ -62,6 +62,13 @@
 			"data": "boilerplate/docs/models/accordion.json"
 		},
 		{
+			"path": "slideshow",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/Slideshow.hbs",
+			"data": "boilerplate/docs/models/slideshow.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},
