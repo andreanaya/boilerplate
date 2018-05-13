@@ -15,3 +15,4 @@ import 'boilerplate/components/sticky-element';
 import 'boilerplate/components/side-panel';
 import 'boilerplate/components/lazy-image';
 import 'boilerplate/components/horizontal-scroll';
+import 'boilerplate/components/dropdown-menu';

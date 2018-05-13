@@ -97,6 +97,13 @@
 			"data": "boilerplate/docs/models/horizontal-scroll.json"
 		},
 		{
+			"path": "dropdown-menu",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/DropdownMenu.hbs",
+			"data": "boilerplate/docs/models/dropdown-menu.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},
