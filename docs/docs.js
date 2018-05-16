@@ -6,6 +6,7 @@ import './components/loader';
 import './components/gestures';
 import './components/history-controller';
 import './components/scroll-controller';
+import './components/cookie-bar';
 
 //Components
 import 'boilerplate/components/accordion';
