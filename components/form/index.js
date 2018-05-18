@@ -69,16 +69,16 @@ export class DateField {
         this.year = el.querySelector('[data-ref="year"]');
 
         const customValidation = () => {
-            const dateString = this.day.value + '/' + this.month.value + '/' + this.year.value;
+            const dateString = this.year.value + '-' + this.month.value + '-' + this.day.value;
             let msg = '';
 
-            if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) {
+            if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(dateString)) {
 			    msg = 'Invalid';
             } else {
-                const parts = dateString.split('/');
-                const day = parseInt(parts[0], 10);
+                const parts = dateString.split('-');
+                const year = parseInt(parts[0], 10);
                 const month = parseInt(parts[1], 10);
-                const year = parseInt(parts[2], 10);
+                const day = parseInt(parts[2], 10);
 
                 if (year < 1000 || year > 3000) {
                     msg = 'Invalid';
