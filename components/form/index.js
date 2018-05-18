@@ -3,7 +3,7 @@ import {register} from 'boilerplate/general/js/Factory.js';
 export default class Form {
 	constructor(el) {
 		this.el = el;
-		this.el.addEventListener('submit', this.onSubmit = onSubmit.bind(this));
+		this.el.addEventListener('submit', onSubmit.bind(this));
 	}
 
 	submit() {
