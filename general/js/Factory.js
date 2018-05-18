@@ -1,5 +1,7 @@
 import {subscribe} from 'boilerplate/general/js/EventSystem.js';
 
+const prefix = 'cp';
+
 let components = {};
 let map = new WeakMap();
 

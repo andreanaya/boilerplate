@@ -111,6 +111,13 @@
 			"data": "boilerplate/docs/models/cookie-bar.json"
 		},
 		{
+			"path": "form",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/Form.hbs",
+			"data": "boilerplate/docs/models/form.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},
