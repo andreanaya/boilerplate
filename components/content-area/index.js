@@ -14,17 +14,7 @@ export default class ContentArea {
 
             let body = /<body[^>]*>((.|[\n\r])*)<\/body>/im.exec(response)[1] || response;
 
-            let div = document.createElement('div');
-            div.innerHTML = body;
-
-            let html = div.querySelector('#'+this.id).innerHTML;
-
-            if(this.type == 'replace') {
-            	this.el.innerHTML = html;
-            } else if(this.type == 'append') {
-            	this.el.insertAdjacentHTML('beforeend', html);
-            }
-            
+            this.parse(body);
 
             this.el.broadcast(new CustomEvent('content:loaded:'+this.id, {
 				detail: {
@@ -38,6 +28,18 @@ export default class ContentArea {
 			this.loader.load(e.detail.url);
 			this.type = e.detail.type;
 		})
+	}
+
+	parse(body) {
+		let div = document.createElement('div');
+        div.innerHTML = body;
+        let html = div.querySelector('#'+this.id).innerHTML;
+
+		if(this.type == 'replace') {
+        	this.el.innerHTML = html;
+        } else if(this.type == 'append') {
+        	this.el.insertAdjacentHTML('beforeend', html);
+        }
 	}
 }
 
