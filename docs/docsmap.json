@@ -118,6 +118,13 @@
 			"data": "boilerplate/docs/models/form.json"
 		},
 		{
+			"path": "parallax",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/Parallax.hbs",
+			"data": "boilerplate/docs/models/parallax.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},

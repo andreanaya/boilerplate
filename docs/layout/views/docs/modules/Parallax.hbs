@@ -1,0 +1,29 @@
+<h1>{{title}}</h1>
+
+<div class="constrain" data-parallax-container>
+	<div class="grid">
+		{{#for 1 12}}
+			<div class="cell span-6 span-4--tablet span-3--desktop span-2--wide">
+				<div class="bg-pink squared"></div>
+			</div>
+		{{/for}}
+		<div class="cell span-3" data-component="parallax" data-type="trigger">
+			<div class="bg-green squared"></div>
+		</div>
+		<div class="cell span-3" style="transition: transfrorm 0.3s ease-out;" data-component="parallax" data-type="parallax" data-parallax-start="transform: translateY(-100px); opacity: 1" data-parallax-end="transform: translateY(100px); opacity: 0;">
+			<div class="bg-green squared"></div>
+		</div>
+		<div class="cell span-3" data-component="parallax" data-type="parallax" data-parallax-start="transform: translateY(100px); opacity: 1;" data-parallax-end="transform: translateY(-100px); opacity: 0;">
+			<div class="bg-green squared"></div>
+		</div>
+		<div class="cell span-3" data-component="parallax" data-type="trigger">
+			<div class="bg-green squared"></div>
+		</div>
+		{{#for 1 12}}
+			<div class="cell span-6 span-4--tablet span-3--desktop span-2--wide">
+				<div class="bg-blue squared"></div>
+			</div>
+		{{/for}}
+	</div>
+</div>
+
