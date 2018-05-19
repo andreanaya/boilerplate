@@ -1,9 +1,18 @@
 import {register} from 'boilerplate/general/js/Factory.js';
 
+const map = new WeakMap();
+
 export default class Form {
 	constructor(el) {
 		this.el = el;
-		this.el.addEventListener('submit', onSubmit.bind(this));
+		
+		[...el.querySelectorAll('button, inptu[type="submit"]')].forEach((submit) => {
+			submit.addEventListener('click', onSubmit.bind(this))
+		});
+	}
+
+	validate() {
+		return [...this.el.querySelectorAll('input, select, textarea')].filter(field => !map.get(field).validate()).length == 0;
 	}
 
 	submit() {
@@ -34,6 +43,9 @@ export class InputField {
 		this.el = el;
 
 		this.field = el.querySelector('[data-ref="input"]');
+
+		map.set(this.field, this);
+
 		this.field.addEventListener('change', onChange.bind(this));
 		this.field.addEventListener('focus', onFocus.bind(this));
 		this.field.addEventListener('blur', onBlur.bind(this));
@@ -56,7 +68,13 @@ export class InputField {
 	}
 
 	validate() {
-		return this.field.checkValidity();
+		if(this.field.checkValidity()) {
+			this.el.classList.remove('is-invalid');
+			return true;
+		} else {
+			this.el.classList.add('is-invalid');
+			return false;
+		}
 	}
 }
 
@@ -68,45 +86,9 @@ export class DateField {
         this.month = el.querySelector('[data-ref="month"]');
         this.year = el.querySelector('[data-ref="year"]');
 
-        const customValidation = () => {
-            const dateString = this.year.value + '-' + this.month.value + '-' + this.day.value;
-            let msg = '';
-
-            if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(dateString)) {
-			    msg = 'Invalid';
-            } else {
-                const parts = dateString.split('-');
-                const year = parseInt(parts[0], 10);
-                const month = parseInt(parts[1], 10);
-                const day = parseInt(parts[2], 10);
-
-                if (year < 1000 || year > 3000) {
-                    msg = 'Invalid';
-                }
-
-                if (month == 0 || month > 12) {
-                    msg = 'Invalid';
-                }
-
-                const monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-                if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
-                    monthLength[1] = 29;
-                }
-
-                if (day <= 0 || day > monthLength[month - 1]) {
-                    msg = 'Invalid';
-                }
-            }
-
-            this.day.setCustomValidity(msg);
-            this.month.setCustomValidity(msg);
-            this.year.setCustomValidity(msg);
-        };
-
-        this.day.customValidation = customValidation;
-        this.month.customValidation = customValidation;
-        this.year.customValidation = customValidation;
+        map.set(this.day, this);
+        map.set(this.month, this);
+        map.set(this.year, this);
 
         [this.day, this.month, this.year].forEach((el) => {
         	el.addEventListener('change', onChange.bind(this));
@@ -132,7 +114,47 @@ export class DateField {
 	}
 
 	validate() {
-		return this.day.checkValidity() && this.month.checkValidity() && this.year.checkValidity();
+		const dateString = this.year.value + '-' + this.month.value + '-' + this.day.value;
+        let msg = '';
+
+        if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(dateString)) {
+		    msg = 'Invalid';
+        } else {
+            const parts = dateString.split('-');
+            const year = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const day = parseInt(parts[2], 10);
+
+            if (year < 1000 || year > 3000) {
+                msg = 'Invalid';
+            }
+
+            if (month == 0 || month > 12) {
+                msg = 'Invalid';
+            }
+
+            const monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+            if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
+                monthLength[1] = 29;
+            }
+
+            if (day <= 0 || day > monthLength[month - 1]) {
+                msg = 'Invalid';
+            }
+        }
+
+        this.day.setCustomValidity(msg);
+        this.month.setCustomValidity(msg);
+        this.year.setCustomValidity(msg);
+
+        if(msg == '') {
+			this.el.classList.remove('is-invalid');
+			return true;
+		} else {
+			this.el.classList.add('is-invalid');
+			return false;
+		}
 	}
 }
 
@@ -142,11 +164,10 @@ export class ConfirmPasswordField {
 
 		this.ref = document.getElementById(this.el.dataset.ref)
 
-		this.field.customValidation = () => {
-			this.day.setCustomValidity(this.field.value != '' && this.field.value == this.ref.value ? '' : 'Password don\'t match');
-		};
-
 		this.field = el.querySelector('[data-ref="input"]');
+
+		map.set(this.field, this);
+
 		this.field.addEventListener('change', onChange.bind(this));
 		this.field.addEventListener('focus', onFocus.bind(this));
 		this.field.addEventListener('blur', onBlur.bind(this));
@@ -169,7 +190,17 @@ export class ConfirmPasswordField {
 	}
 
 	validate() {
-		return this.field.checkValidity();
+		let msg = this.field.value != '' && this.field.value == this.ref.value ? '' : 'Invalid';
+		
+		this.field.setCustomValidity(msg);
+
+		if(msg == '') {
+			this.el.classList.remove('is-invalid');
+			return true;
+		} else {
+			this.el.classList.add('is-invalid');
+			return false;
+		}
 	}
 }
 
@@ -199,7 +230,7 @@ function onInput() {
 }
 
 function onSubmit(e) {
-	if (this.el.checkValidity()) {
+	if (this.validate()) {
 		this.submit();
 	}
 
