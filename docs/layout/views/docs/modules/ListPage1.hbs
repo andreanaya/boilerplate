@@ -1,0 +1,13 @@
+<h1>{{title}}</h1>
+
+<div class="constrain padding-md">
+	<div class="grid" data-component="content-area" id="test">
+		{{#for 1 12}}
+			<div class="cell span-6 span-4--tablet span-3--desktop span-2--wide">
+				<div class="bg-pink squared"></div>
+			</div>
+		{{/for}}
+	</div>
+
+	{{> boilerplate/docs/layout/components/append.hbs id="test" next=2}}
+</div>

@@ -19,3 +19,6 @@ import 'boilerplate/components/horizontal-scroll';
 import 'boilerplate/components/dropdown-menu';
 import 'boilerplate/components/form';
 import 'boilerplate/components/parallax';
+import 'boilerplate/components/content-area';
+import 'boilerplate/components/content-pagination';
+import 'boilerplate/components/content-append';

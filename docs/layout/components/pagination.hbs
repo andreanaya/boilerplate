@@ -1,0 +1,9 @@
+<div data-component="content-pagination" data-target="{{id}}">
+{{#for 1 3}}
+	{{#if_eq @index page}}
+		<span class="mg-right-sm is-active">{{@index}}</span>
+	{{else}}
+		<a href="/docs/content-page{{@index}}" class="mg-right-sm">{{@index}}</a>
+	{{/if_eq}}
+{{/for}}
+</div>

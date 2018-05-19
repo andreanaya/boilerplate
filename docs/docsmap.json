@@ -125,6 +125,48 @@
 			"data": "boilerplate/docs/models/parallax.json"
 		},
 		{
+			"path": "content-page1",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/ContentPage1.hbs",
+			"data": "boilerplate/docs/models/content.json"
+		},
+		{
+			"path": "content-page2",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/ContentPage2.hbs",
+			"data": "boilerplate/docs/models/content.json"
+		},
+		{
+			"path": "content-page3",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/ContentPage3.hbs",
+			"data": "boilerplate/docs/models/content.json"
+		},
+		{
+			"path": "list-page1",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/ListPage1.hbs",
+			"data": "boilerplate/docs/models/content.json"
+		},
+		{
+			"path": "list-page2",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/ListPage2.hbs",
+			"data": "boilerplate/docs/models/content.json"
+		},
+		{
+			"path": "list-page3",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/ListPage3.hbs",
+			"data": "boilerplate/docs/models/content.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},
