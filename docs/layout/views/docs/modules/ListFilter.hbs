@@ -1,0 +1,29 @@
+<h1>{{title}}</h1>
+
+<div class="constrain padding-md">
+	{{> boilerplate/docs/layout/components/filter.hbs target="test"}}
+
+	<div class="grid" data-component="content-area" id="test">
+		{{#if_eq @root.query.color "pink"}}
+			{{#for 1 12}}
+				<div class="cell span-6 span-4--tablet span-3--desktop span-2--wide">
+					<div class="bg-pink squared"></div>
+				</div>
+			{{/for}}
+		{{/if_eq}}
+		{{#if_eq @root.query.color "blue"}}
+			{{#for 1 12}}
+				<div class="cell span-6 span-4--tablet span-3--desktop span-2--wide">
+					<div class="bg-blue squared"></div>
+				</div>
+			{{/for}}
+		{{/if_eq}}
+		{{#if_eq @root.query.color "green"}}
+			{{#for 1 12}}
+				<div class="cell span-6 span-4--tablet span-3--desktop span-2--wide">
+					<div class="bg-green squared"></div>
+				</div>
+			{{/for}}
+		{{/if_eq}}
+	</div>
+</div>

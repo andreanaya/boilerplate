@@ -167,6 +167,13 @@
 			"data": "boilerplate/docs/models/content.json"
 		},
 		{
+			"path": "list-filter",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/ListFilter.hbs",
+			"data": "boilerplate/docs/models/content.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},

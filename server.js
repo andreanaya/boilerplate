@@ -135,9 +135,10 @@ if(config.sitemap) {
 				isDev: process.argv[1].indexOf('server') >= 0,
 				template: route.template
 			};
-
+			
 			if(route.meta) options.meta = route.meta;
 			if(req.params) options.params = req.params;
+			if(req.query) options.query = req.query;
 			if(route.data) options.data = JSON.parse(fs.readFileSync(path.resolve(config.templates.basedir+'/'+route.data), 'utf8'));
 
 			res.render(route.basePath, options);

@@ -22,3 +22,4 @@ import 'boilerplate/components/parallax';
 import 'boilerplate/components/content-area';
 import 'boilerplate/components/content-pagination';
 import 'boilerplate/components/content-append';
+import 'boilerplate/components/content-filter';

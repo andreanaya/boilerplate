@@ -1,0 +1,8 @@
+<form action="/docs/list-filter" method="get" class="mg-bottom-md" data-component="content-filter" data-target="{{target}}">
+	<select name="color">
+		<option value="pink" {{#if_eq @root.query.color "pink"}}selected{{/if_eq}}>Pink</option>
+		<option value="green" {{#if_eq @root.query.color "green"}}selected{{/if_eq}}>Green</option>
+		<option value="blue" {{#if_eq @root.query.color "blue"}}selected{{/if_eq}}>Blue</option>
+	</select>
+	<button>Filter</button>
+</form>
