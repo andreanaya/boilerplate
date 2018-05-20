@@ -184,7 +184,7 @@
 					"path": "typography",
 					"basePath": "boilerplate/docs/layout/docs",
 					"meta": {},
-					"template": "boilerplate/docs/layout/views/docs/modules/typography.hbs",
+					"template": "boilerplate/docs/layout/views/docs/modules/Typography.hbs",
 					"data": "boilerplate/docs/models/typography.json"
 				},
 				{

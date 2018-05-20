@@ -1,0 +1,32 @@
+.lightbox {
+	display: none;
+	position: relative;
+	width: 100%;
+
+	padding: 100px 20%;
+
+	background-color: rgba(0, 0, 0, 0.5);
+
+	> div {
+		background-color: #fff;
+	}
+
+	&.is-visible {
+		display: block;
+	}
+
+	.close {
+		display: block;
+		position: fixed;
+		
+		width: 25px;
+		height:25px;
+
+		top: 50px;
+		right: 50px;
+
+		background-color: #f60;
+
+		cursor: pointer;
+	}
+}

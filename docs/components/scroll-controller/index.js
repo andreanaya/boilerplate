@@ -1,4 +1,5 @@
 import {register} from 'boilerplate/general/js/Factory.js';
+import './lightbox.scss';
 
 export default class Docs {
     constructor(el) {
@@ -24,11 +25,17 @@ export default class Docs {
         });
 
         square.addEventListener('click', function(e) {
-            if(el.classList.contains('is-locked')) {
-                el.unlock();
-            } else {
-                el.lock();
-            }
+            // if(el.classList.contains('is-locked')) {
+            //     el.unlock();
+            // } else {
+            //     el.lock();
+            // }
+            console.log('lightbox:open:docs')
+            document.body.emit(new CustomEvent('lightbox:open:docs', {
+                detail: {
+                    url: '/docs/styleguide/typography'
+                }
+            }));
         })
     }
 }
