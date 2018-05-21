@@ -6,25 +6,18 @@ const loader = new Loader();
 
 let onComplete;
 
-loader.addEventListener('complete', );
-
 export default class Lightbox {
 	constructor(el) {
 		this.el = el;
 		this.target = el.dataset.target;
-		let target = document.querySelector('#'+this.target);
-
+		
 		let close = document.createElement('div');
 		close.className = "close";
 		close.addEventListener('click', (e) => {
-			if(target) {
-				target.unlock();
-			}
-
-			this.el.classList.remove('is-visible');
+			this.hide();
 		})
 
-		this.el.subscribe('lightbox:open:'+this.target, (e) => {
+		this.el.subscribe('lightbox:load:'+this.target, (e) => {
 
 			loader.abort();
 
@@ -38,23 +31,49 @@ export default class Lightbox {
 				let div = document.createElement('div');
 				div.innerHTML = body;
 				let content = div.querySelector('#'+this.target);
-				content.id = 'lighbox'+this.target;
+				content.id = 'lightbox'+this.target;
 
 				while(this.el.children.length>0) this.el.removeChild(this.el.children[0]);
 				this.el.appendChild(content);
 				this.el.appendChild(close);
 
-				if(target) {
-					target.lock();
-				}
-
-				this.el.classList.add('is-visible');
+				this.show();
 			}
 
 			loader.addEventListener('complete', onComplete);
 
 			loader.load(e.detail.url);
 		});
+
+		this.el.subscribe('lightbox:inject:'+this.target, (e) => {
+			let content = document.createElement('div');
+			content.innerHTML = e.detail.html;
+
+			while(this.el.children.length>0) this.el.removeChild(this.el.children[0]);
+
+			this.el.appendChild(content);
+			this.el.appendChild(close);
+
+			this.show();
+		});
+	}
+
+	show() {
+		let target = document.querySelector('#'+this.target);
+		if(target) {
+			target.lock();
+		}
+
+		this.el.classList.add('is-visible');
+	}
+
+	hide() {
+		let target = document.querySelector('#'+this.target);
+		if(target) {
+			target.unlock();
+		}
+
+		this.el.classList.remove('is-visible');
 	}
 }
 

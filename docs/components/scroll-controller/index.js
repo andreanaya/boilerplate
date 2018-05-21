@@ -5,7 +5,7 @@ export default class Docs {
     constructor(el) {
 		console.log('ok')
         
-        var square = el.querySelector('.bg-green');
+        var square = el.querySelector('.bg-green').parentNode;
 
         square.track();
 
@@ -24,16 +24,28 @@ export default class Docs {
             console.log('-----');
         });
 
+        console.log(square.nextElementSibling)
+
+        square.previousElementSibling.addEventListener('click', function(e) {
+            if(el.classList.contains('is-locked')) {
+                el.unlock();
+            } else {
+                el.lock();
+            }
+        })
+
         square.addEventListener('click', function(e) {
-            // if(el.classList.contains('is-locked')) {
-            //     el.unlock();
-            // } else {
-            //     el.lock();
-            // }
-            console.log('lightbox:open:docs')
-            document.body.emit(new CustomEvent('lightbox:open:docs', {
+            document.body.emit(new CustomEvent('lightbox:load:docs', {
                 detail: {
                     url: '/docs/styleguide/typography'
+                }
+            }));
+        })
+
+        square.nextElementSibling.addEventListener('click', function(e) {
+            document.body.emit(new CustomEvent('lightbox:inject:docs', {
+                detail: {
+                    html: '<div class="full-width padding-md">Test</div>'
                 }
             }));
         })

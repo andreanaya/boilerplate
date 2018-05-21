@@ -2,6 +2,7 @@
 	display: none;
 	position: relative;
 	width: 100%;
+	min-height: 100vh;
 
 	padding: 100px 20%;
 
@@ -12,7 +13,9 @@
 	}
 
 	&.is-visible {
-		display: block;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 
 	.close {

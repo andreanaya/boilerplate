@@ -1,0 +1,70 @@
+<style>
+	.slider {
+		display: block;
+		position: relative;
+		overflow: hidden;
+	}
+	.container {
+		display: block;
+		position: relative;
+		white-space: nowrap;
+		font-size: 0;
+	}
+	.slide {
+		display: inline-block;
+		width: 200px;
+
+	}
+	.slide:nth-child(3n+1) {
+		width: 150px;
+	}
+
+	.slide:nth-child(3n+2) {
+		width: 300px;
+	}
+
+	.prev, .next {
+		display: block;
+		position: absolute;
+
+		top: 50%;
+
+		width: 25px;
+		height: 25px;
+
+		margin-top: -12px;
+
+		background-color: #ccc;
+
+		cursor: pointer;
+	}
+
+	.prev {
+		left: 0;
+	}
+
+	.next {
+		right: 0;
+	}
+</style>
+
+<h1>{{title}}</h1>
+
+<div class="slider" data-component="slider">
+	<div class="container" data-container>
+	{{#for 1 4}}
+		<div class="slide" data-slide>
+			<div class="bg-pink squared"></div>
+		</div>
+		<div class="slide" data-slide>
+			<div class="bg-blue squared"></div>
+		</div>
+		<div class="slide" data-slide>
+			<div class="bg-green squared"></div>
+		</div>
+	{{/for}}
+	</div>
+
+	<div class="prev" data-prev></div>
+	<div class="next" data-next></div>
+</div>

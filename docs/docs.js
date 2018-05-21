@@ -24,3 +24,4 @@ import 'boilerplate/components/content-pagination';
 import 'boilerplate/components/content-append';
 import 'boilerplate/components/content-filter';
 import 'boilerplate/components/lightbox';
+import 'boilerplate/components/slider';
