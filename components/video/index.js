@@ -55,13 +55,59 @@ export class YouTubeVideo {
 		let video = this.el.querySelector('[data-video]');
 
 		this.video = new YT.Player(video.id, {
-			videoId: video.id.substr('yt-video-'.length),
+			videoId: video.id.substr('yt-'.length),
 			playerVars: this.playerVars,
 			events: {
-				'onReady': onPlayerReady.bind(this),
-				'onStateChange': onPlayerStateChange.bind(this)
+				'onReady': onYTPlayerReady.bind(this),
+				'onStateChange': onYTPlayerStateChange.bind(this)
 			}
 		});
+	}
+}
+
+export class VimeoVideo {
+	constructor(el) {
+		this.el = el;
+
+		// if(this.el.dataset.playerVars) {
+		// 	this.playerVars = JSON.parse(this.el.dataset.playerVars.replace(/([{, ])([^:"]*):/gim, "$1\"$2\":"));
+		// } else {
+		// 	this.playerVars = {};
+		// }
+
+		// if(this.playerVars.rel === undefined) {
+		// 	this.playerVars.rel = 0;
+		// }
+
+		this.button = this.el.querySelector('[data-button]');
+
+		if(checkVimeo()) {
+			this.el.subscribe('vimeo:ready', () => {
+				this.createPlayer();
+			})
+		} else {
+			this.createPlayer();
+		}
+	}
+
+	createPlayer() {
+		let video = this.el.querySelector('[data-video]');
+
+		this.video = new Vimeo.Player(video.id, {
+			id: video.id.substr('vm-'.length)
+		});
+
+		this.video.ready().then(()=> {
+			this.video.on('ended', (e) => {
+				this.el.classList.remove('is-playing');
+			});
+
+			this.button.addEventListener('click', (e) => {
+				this.video.play().then(() => {
+					this.el.classList.add('is-playing');
+				})
+			})
+		})
 	}
 }
 
@@ -80,14 +126,32 @@ function checkYT() {
 	return window.YT === undefined;
 }
 
-function onPlayerReady() {
+function checkVimeo() {
+	if(document.querySelector('script[src="https://player.vimeo.com/api/player.js"]') == undefined) {
+		let tag = document.createElement('script');
+		tag.src = "https://player.vimeo.com/api/player.js";
+		let firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		let id = setInterval(() => {
+			if(Vimeo !== undefined) {
+				document.body.emit(new CustomEvent('vimeo:ready'));
+				clearInterval(id);
+			}
+		}, 10);
+	}
+
+	return window.YT === undefined;
+}
+
+function onYTPlayerReady() {
 	this.button.addEventListener('click', (e) => {
 		this.video.playVideo();
 		this.el.classList.add('is-playing');
 	})
 }
 
-function onPlayerStateChange(e) {
+function onYTPlayerStateChange(e) {
 	if(e.data == YT.PlayerState.ENDED) {
 		this.el.classList.remove('is-playing');
 	}
@@ -257,5 +321,6 @@ function getTime(time, format) {
 }
 
 register('youtube-video', YouTubeVideo);
+register('vimeo-video', VimeoVideo);
 register('bg-video', BGVideo);
 register('inline-video', InlineVideo);
