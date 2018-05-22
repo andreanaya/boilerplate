@@ -1,18 +1,79 @@
 import {register} from 'boilerplate/general/js/Factory.js';
 
+export default class ChromelessVideo {
+	constructor(el) {
+		this.el = el;
+
+		this.el.subscribe('video:play', (e) => {
+			this.el.play();
+		});
+
+		this.el.subscribe('video:pause', (e) => {
+			this.el.pause();
+		});
+
+		this.el.subscribe('video:mute', (e) => {
+			this.el.muted = true;
+		});
+
+		this.el.subscribe('video:unmute', (e) => {
+			this.el.muted = false;
+		});
+
+		this.el.subscribe('video:seek', (e) => {
+			this.el.currentTime = e.detail.currentTime;
+		});
+	}
+}
+
+export class BGVideo {
+	constructor(el) {
+		this.el = el;
+		this.video = new ChromelessVideo(el.querySelector('video'));
+
+		this.el.subscribe('resize', (e) => {
+			this.resize();
+		});
+
+		this.video.el.addEventListener('loadedmetadata', (e)=> {
+			this.resize();
+		})
+
+	}
+
+	resize() {
+		let W = this.el.offsetWidth;
+		let H = this.el.offsetHeight;
+		
+		let w = W;
+		let h = w*this.video.el.videoHeight/this.video.el.videoWidth >> 0;
+		
+		if(h<H) {
+			h = H;
+			w = h*this.video.el.videoWidth/this.video.el.videoHeight >> 0;
+		}
+
+		this.video.el.style.width = w+'px';
+		this.video.el.style.height = h+'px';
+		
+		this.video.el.style.marginTop = ((H-h)>>1)+'px';
+		this.video.el.style.marginLeft = ((W-w)>>1)+'px';
+	}
+}
+
 export class InlineVideo {
 	constructor(el) {
 		this.el = el;
 
-		this.video = el.querySelector('video');
+		this.video = new ChromelessVideo(el.querySelector('video'));
 
 		setControls.call(this);
 
-		if(this.video.paused && !this.video.autoplay) {
+		if(this.video.el.paused && !this.video.el.autoplay) {
 			this.el.classList.add('is-paused');
 		}
 
-		if(this.video.muted) {
+		if(this.video.el.muted) {
 			this.el.classList.add('is-muted');
 		}
 	}
@@ -51,24 +112,25 @@ function setControls() {
 
 function setPlayToggle(el) {
 	el.addEventListener('click', (e) => {
-		if(this.video.paused) {
-			this.video.play();
+		if(this.video.el.paused) {
+			this.el.emit(new CustomEvent('video:play'));
 			this.el.classList.remove('is-paused');
 		} else {
-			this.video.pause();
+			this.el.emit(new CustomEvent('video:pause'));
 			this.el.classList.add('is-paused');
 		}
 	})
 }
 
 function setVolumeToggle(el) {
+	console.log('volume toggle')
 	el.addEventListener('click', (e) => {
-		if(this.video.muted) {
-			this.video.muted = false;
-			this.el.classList.add('is-muted');
-		} else {
-			this.video.muted = true;
+		if(this.video.el.muted) {
+			this.el.emit(new CustomEvent('video:unmute'));
 			this.el.classList.remove('is-muted');
+		} else {
+			this.el.emit(new CustomEvent('video:mute'));
+			this.el.classList.add('is-muted');
 		}
 	})
 }
@@ -79,7 +141,7 @@ function setProgress(el) {
 
 	if(thumb) {
 		const onMouseDown = (e) => {
-			if(!this.el.classList.contains('is-paused')) this.video.pause();
+			if(!this.el.classList.contains('is-paused')) this.el.emit(new CustomEvent('video:pause'));
 			window.addEventListener('mousemove', onMouseMove);
 			window.addEventListener('mouseup', onMouseUp);
 		}
@@ -88,11 +150,11 @@ function setProgress(el) {
 			let bounds = el.getBoundingClientRect();
 			let amount = (e.clientX - bounds.left)/bounds.width;
 			
-			this.video.currentTime = this.video.duration*amount;
+			this.el.emit(new CustomEvent('video:seek', {detail: {currentTime: this.video.el.duration*amount}}));
 		}
 
 		const onMouseUp = (e) => {
-			if(!this.el.classList.contains('is-paused')) this.video.play();
+			if(!this.el.classList.contains('is-paused')) this.el.emit(new CustomEvent('video:play'));
 			window.removeEventListener('mousemove', onMouseMove);
 			window.removeEventListener('mouseup', onMouseUp);
 		}
@@ -100,8 +162,8 @@ function setProgress(el) {
 		thumb.addEventListener('mousedown', onMouseDown);
 	}
 
-	this.video.addEventListener('timeupdate', (e) => {
-		let amount = this.video.currentTime/this.video.duration;
+	this.video.el.addEventListener('timeupdate', (e) => {
+		let amount = this.video.el.currentTime/this.video.el.duration;
 		if(bar) bar.style.transform = 'scaleX('+amount+')';
 		if(thumb) thumb.style.left = 100*amount+'%';
 	});
@@ -112,12 +174,9 @@ function setTime(el) {
 	let total = el.querySelector('[data-control="time-total"]');
 
 
-	this.video.addEventListener('timeupdate', (e) => {
-		current.innerHTML = getTime(this.video.currentTime, el.dataset.format)
-		total.innerHTML = getTime(this.video.duration, el.dataset.format)
-		// let amount = this.video.currentTime/this.video.duration;
-		// if(bar) bar.style.transform = 'scaleX('+amount+')';
-		// if(thumb) thumb.style.left = 100*amount+'%';
+	this.video.el.addEventListener('timeupdate', (e) => {
+		current.innerHTML = getTime(this.video.el.currentTime, el.dataset.format);
+		total.innerHTML = getTime(this.video.el.duration, el.dataset.format);
 	});
 }
 
@@ -131,4 +190,5 @@ function getTime(time, format) {
 				 .replace('SS', s.padStart(2, '0'));
 }
 
+register('bg-video', BGVideo);
 register('inline-video', InlineVideo);

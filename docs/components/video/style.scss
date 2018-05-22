@@ -1,3 +1,11 @@
+.bg-video {
+	display: block;
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
 .inline-video {
 	display: block;
 	margin-left: auto;
