@@ -1,3 +1,34 @@
+.youtube-video {
+	display: block;
+	position: relative;
+	width: 720px;
+	height: 405px;
+
+	iframe {
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__poster {
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		margin: 0;
+		object-fit: cover;
+
+		cursor: pointer;
+
+		.is-playing & {
+			display: none;
+		}
+	}
+}
+
 .bg-video {
 	display: block;
 	position: relative;

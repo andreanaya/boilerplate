@@ -26,6 +26,73 @@ export default class ChromelessVideo {
 	}
 }
 
+export class YouTubeVideo {
+	constructor(el) {
+		this.el = el;
+
+		if(this.el.dataset.playerVars) {
+			this.playerVars = JSON.parse(this.el.dataset.playerVars.replace(/([{, ])([^:"]*):/gim, "$1\"$2\":"));
+		} else {
+			this.playerVars = {};
+		}
+
+		if(this.playerVars.rel === undefined) {
+			this.playerVars.rel = 0;
+		}
+
+		this.button = this.el.querySelector('[data-button]');
+
+		if(checkYT()) {
+			this.el.subscribe('youtube:ready', () => {
+				this.createPlayer();
+			})
+		} else {
+			this.createPlayer();
+		}
+	}
+
+	createPlayer() {
+		let video = this.el.querySelector('[data-video]');
+
+		this.video = new YT.Player(video.id, {
+			videoId: video.id.substr('yt-video-'.length),
+			playerVars: this.playerVars,
+			events: {
+				'onReady': onPlayerReady.bind(this),
+				'onStateChange': onPlayerStateChange.bind(this)
+			}
+		});
+	}
+}
+
+function checkYT() {
+	if(document.querySelector('script[src="https://www.youtube.com/iframe_api"]') == undefined) {
+		let tag = document.createElement('script');
+		tag.src = "https://www.youtube.com/iframe_api";
+		let firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		window.onYouTubeIframeAPIReady = function() {
+			document.body.emit(new CustomEvent('youtube:ready'));
+		}
+	}
+
+	return window.YT === undefined;
+}
+
+function onPlayerReady() {
+	this.button.addEventListener('click', (e) => {
+		this.video.playVideo();
+		this.el.classList.add('is-playing');
+	})
+}
+
+function onPlayerStateChange(e) {
+	if(e.data == YT.PlayerState.ENDED) {
+		this.el.classList.remove('is-playing');
+	}
+}
+
 export class BGVideo {
 	constructor(el) {
 		this.el = el;
@@ -123,7 +190,6 @@ function setPlayToggle(el) {
 }
 
 function setVolumeToggle(el) {
-	console.log('volume toggle')
 	el.addEventListener('click', (e) => {
 		if(this.video.el.muted) {
 			this.el.emit(new CustomEvent('video:unmute'));
@@ -190,5 +256,6 @@ function getTime(time, format) {
 				 .replace('SS', s.padStart(2, '0'));
 }
 
+register('youtube-video', YouTubeVideo);
 register('bg-video', BGVideo);
 register('inline-video', InlineVideo);
