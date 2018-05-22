@@ -7,6 +7,7 @@ import './components/gestures';
 import './components/history-controller';
 import './components/scroll-controller';
 import './components/cookie-bar';
+import './components/video';
 
 //Components
 import 'boilerplate/components/accordion';
@@ -25,3 +26,4 @@ import 'boilerplate/components/content-append';
 import 'boilerplate/components/content-filter';
 import 'boilerplate/components/lightbox';
 import 'boilerplate/components/slider';
+import 'boilerplate/components/video';

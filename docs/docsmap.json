@@ -181,6 +181,13 @@
 			"data": "boilerplate/docs/models/slider.json"
 		},
 		{
+			"path": "video",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/Video.hbs",
+			"data": "boilerplate/docs/models/video.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},
