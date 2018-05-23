@@ -1,0 +1,38 @@
+.rich-table {
+	display: block;
+	position: relative;
+	
+	&__header {
+		&-row {
+		
+		}
+
+		&-column {
+
+		}
+
+		&-label {
+			display: block;
+		}
+
+		&-filter {
+			display: block;
+			position: relative;
+			width: 100%;
+			border: 1px solid #ccc;
+		}
+
+		&-option {
+			display: block;
+			float: left;
+			padding: 10px;
+			width: 100%;
+
+			border-top: 1px solid #ccc;
+
+			&:first-child {
+				border-top: none;
+			}
+		}
+	}
+}

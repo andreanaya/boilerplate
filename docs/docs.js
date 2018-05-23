@@ -9,6 +9,7 @@ import './components/scroll-controller';
 import './components/cookie-bar';
 import './components/video';
 import './components/map';
+import './components/rich-table';
 
 //Components
 import 'boilerplate/components/accordion';

@@ -195,6 +195,13 @@
 			"data": "boilerplate/docs/models/maps.json"
 		},
 		{
+			"path": "rich-table",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/RichTable.hbs",
+			"data": "boilerplate/docs/models/rich-table.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},

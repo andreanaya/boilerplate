@@ -1,0 +1,45 @@
+<h1>{{title}}</h1>
+
+<div class="constrain">
+	{{#table}}
+	<form class="rich-table" action="/docs/rich-table" method="GET" data-component="richt-table" enctype='application/json'>
+		<table>
+			<thead class="rich-table__header">
+				<tr class="rich-table__header-row">
+					{{#header}}
+						<th class="rich-table__header-column">
+							<fieldset>
+								<legend class="rich-table__header-label">{{label}}</legend>
+								
+								<select class="rich-table__header-filter" name="filter[{{key}}][]" multiple size="{{options.length}}">
+									{{#options}}
+										{{#contains (lookup @root.query.filter ../key) value}}
+											<option class="rich-table__header-option" value="{{value}}" selected>{{label}}</option>
+										{{else}}
+											<option class="rich-table__header-option" value="{{value}}">{{label}}</option>
+										{{/contains}}
+									{{/options}}
+								</select>
+
+								<button type="submit" name="sort[{{key}}]" value="true">Acending</button>
+								<button type="submit" name="sort[{{key}}]" value="false">Descending</button>
+							</fieldset>
+						</th>
+					{{/header}}
+				</tr>
+			</thead>
+			<tbody>
+				{{#sort body @root.query.sort}}
+					{{#filter @root.query.filter}}
+					<tr>
+						<td>{{id}}</td>
+						<td>{{name}}</td>
+						<td>{{color}}</td>
+					</tr>
+					{{/filter}}
+				{{/sort}}
+			</tbody>
+		</table>
+	</form>
+	{{/table}}
+</div>

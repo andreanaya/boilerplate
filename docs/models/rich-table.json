@@ -1,0 +1,129 @@
+{
+	"title": "Rich Table",
+	"table": {
+		"header": [
+			{
+				"key": "id",
+				"label": "ID",
+				"options": [
+					{
+						"value": "00001",
+						"label": "00001"
+					},
+					{
+						"value": "00002",
+						"label": "00002"
+					},
+					{
+						"value": "00003",
+						"label": "00003"
+					},
+					{
+						"value": "00004",
+						"label": "00004"
+					},
+					{
+						"value": "00005",
+						"label": "00005"
+					},
+					{
+						"value": "00006",
+						"label": "00006"
+					}
+				]
+			},
+			{
+				"key": "name",
+				"label": "Name",
+				"options": [
+					{
+						"value": "Barb",
+						"label": "Barb"
+					},
+					{
+						"value": "Bob",
+						"label": "Bob"
+					},
+					{
+						"value": "Jim",
+						"label": "Jim"
+					},
+					{
+						"value": "Liz",
+						"label": "Liz"
+					},
+					{
+						"value": "Sue",
+						"label": "Sue"
+					},
+					{
+						"value": "Tom",
+						"label": "Tom"
+					}
+				]
+			},
+			{
+				"key": "color",
+				"label": "Favourite Color",
+				"options": [
+					{
+						"value": "Blue",
+						"label": "Blue"
+					},
+					{
+						"value": "Green",
+						"label": "Green"
+					},
+					{
+						"value": "Orange",
+						"label": "Orange"
+					},
+					{
+						"value": "Pink",
+						"label": "Pink"
+					},
+					{
+						"value": "Red",
+						"label": "Red"
+					},
+					{
+						"value": "Yellow",
+						"label": "Yellow"
+					}
+				]
+			}
+		],
+		"body": [
+			{
+				"id": "00001",
+				"name": "Jim",
+				"color": "Blue"
+			},
+			{
+				"id": "00002",
+				"name": "Sue",
+				"color": "Red"
+			},
+			{
+				"id": "00003",
+				"name": "Barb",
+				"color": "Green"
+			},
+			{
+				"id": "00004",
+				"name": "Bob",
+				"color": "Orange"
+			},
+			{
+				"id": "00005",
+				"name": "Tom",
+				"color": "Yellow"
+			},
+			{
+				"id": "00006",
+				"name": "Liz",
+				"color": "Pink"
+			}
+		]
+	}
+}
