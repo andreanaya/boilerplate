@@ -188,6 +188,13 @@
 			"data": "boilerplate/docs/models/video.json"
 		},
 		{
+			"path": "maps",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/Maps.hbs",
+			"data": "boilerplate/docs/models/maps.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},

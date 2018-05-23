@@ -104,6 +104,9 @@ module.exports = env => {
             new CleanWebpackPlugin('dist', {
                 root: path.resolve(__dirname, '../..')
             }),
+            new webpack.DefinePlugin({
+                "GOOGLE_API_KEY": JSON.stringify(fs.readFileSync(path.resolve(__dirname, '../../google-api-key'), 'utf8'))
+            }),
             new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
             new webpack.NamedModulesPlugin(),
             new webpack.NamedChunksPlugin(),

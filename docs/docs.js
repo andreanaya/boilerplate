@@ -8,6 +8,7 @@ import './components/history-controller';
 import './components/scroll-controller';
 import './components/cookie-bar';
 import './components/video';
+import './components/map';
 
 //Components
 import 'boilerplate/components/accordion';
@@ -27,3 +28,4 @@ import 'boilerplate/components/content-filter';
 import 'boilerplate/components/lightbox';
 import 'boilerplate/components/slider';
 import 'boilerplate/components/video';
+import 'boilerplate/components/map';

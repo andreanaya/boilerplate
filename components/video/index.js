@@ -31,7 +31,7 @@ export class YouTubeVideo {
 		this.el = el;
 
 		if(this.el.dataset.playerVars) {
-			this.playerVars = JSON.parse(this.el.dataset.playerVars.replace(/([{, ])([^:"]*):/gim, "$1\"$2\":"));
+			this.playerVars = JSON.parse(this.el.dataset.coords.replace(/([{,])(\s?)([^:]*):([^,}]*)/gim, "$1$2\"$3\":$4"));
 		} else {
 			this.playerVars = {};
 		}
@@ -68,16 +68,6 @@ export class YouTubeVideo {
 export class VimeoVideo {
 	constructor(el) {
 		this.el = el;
-
-		// if(this.el.dataset.playerVars) {
-		// 	this.playerVars = JSON.parse(this.el.dataset.playerVars.replace(/([{, ])([^:"]*):/gim, "$1\"$2\":"));
-		// } else {
-		// 	this.playerVars = {};
-		// }
-
-		// if(this.playerVars.rel === undefined) {
-		// 	this.playerVars.rel = 0;
-		// }
 
 		this.button = this.el.querySelector('[data-button]');
 
