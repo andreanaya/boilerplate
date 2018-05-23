@@ -31,7 +31,7 @@ export class YouTubeVideo {
 		this.el = el;
 
 		if(this.el.dataset.playerVars) {
-			this.playerVars = JSON.parse(this.el.dataset.coords.replace(/([{,])(\s?)([^:]*):([^,}]*)/gim, "$1$2\"$3\":$4"));
+			this.playerVars = JSON.parse(this.el.dataset.playerVars.replace(/([{,]\s?)([^:{,]*):([^,}]*)/gim, "$1\"$2\":$3"));
 		} else {
 			this.playerVars = {};
 		}

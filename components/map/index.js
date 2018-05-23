@@ -13,17 +13,37 @@ export default class Map {
 		}
 	}
 	createMap() {
-		let coords = JSON.parse(this.el.dataset.coords.replace(/([{,])(\s?)([^:]*):([^,}]*)/gim, "$1$2\"$3\":$4"));
-		
-		this.map = new google.maps.Map(this.el, {
-			center: coords,
-			zoom: parseInt(this.el.dataset.zoom) || 15
-        });
+		let bounds = new google.maps.LatLngBounds();
 
-        this.marker = new google.maps.Marker({
-          position: coords,
-          map: this.map
-        });
+		if(this.el.dataset.center !== 'auto') {
+			bounds.extend(JSON.parse(this.el.dataset.center.replace(/([{,]\s?)([^:{,]*):([^,}]*)/gim, "$1\"$2\":$3")));
+		}
+		
+		this.map = new google.maps.Map(this.el);
+
+		if(this.el.dataset.markers) {
+			let markers = JSON.parse(this.el.dataset.markers.replace(/([{,]\s?)([^:{,]*):([^,}]*)/gim, "$1\"$2\":$3"));
+
+			markers.forEach((coords) => {
+				let marker = new google.maps.Marker({
+					position: coords,
+					map: this.map
+				})
+
+				if(this.el.dataset.center === 'auto') bounds.extend(coords);
+			});
+		}
+
+		let zoom = this.el.dataset.zoom ? parseInt(this.el.dataset.zoom) : 15;
+
+		google.maps.event.addListener(this.map, 'zoom_changed', () => {
+			let zoomChangeBoundsListener = google.maps.event.addListener(this.map, 'bounds_changed', function(event) {
+				if (this.getZoom() > zoom)  this.setZoom(zoom);
+				google.maps.event.removeListener(zoomChangeBoundsListener);
+			});
+		});
+
+		this.map.fitBounds(bounds);
 	}
 }
 
