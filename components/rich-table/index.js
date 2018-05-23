@@ -1,44 +1,58 @@
 import {register} from 'boilerplate/general/js/Factory.js';
 
-export default class Accordion {
-	constructor(el) {
-		let button = el.querySelector('[data-button]');
+export default class RichTable {
+    constructor(el) {
+        this.el = el;
 
-		if(button === undefined) return;
+        [...this.el.querySelectorAll('[type="submit"]')].forEach((button)=> {
+        	button.addEventListener('click', (e) => {
+        		let formData = new FormData(this.el);
+        		formData.append(e.currentTarget.name, e.currentTarget.value)
 
-		this.el = el;
-		this.el.block('app:show');
+				var object = {};
 
-		this.content = this.el.querySelector('[data-content]');
-		this.button = button;
+				for(var pair of formData) {
+					processKey(object, pair[0], pair[1]);
+				}
 
-		this.group = el.dataset.group;
-		
-		button.addEventListener('click', this.onClick = onClick.bind(this));
-	}
+				console.log(object);
+
+				e.preventDefault();
+			})
+        })
+    }
 }
 
-function onClick(e) {
-	e.preventDefault();
-	e.stopPropagation();
+function processKey(object, key, value) {
+	var arr = key.split(/\[/).map((key => key.replace(/([a-zA-Z0-9])\]/igm, '$1').replace(/^\]/igm, '\[\]')));
 
-	this.el.classList.toggle('is-open');
+	let ref = object;
 
-	if(this.el.classList.contains('is-open')) {
-		this.el.emit(new CustomEvent('app:show'));
+	if(arr[arr.length-1] == '[]') {
+		arr.pop();
+		value = [value];
 	}
 
-	if(this.group && this.group !== '') {
-		var group = document.querySelectorAll('[data-component=accordion][data-group='+this.group+']');
+	
+	arr.forEach((item, index, arr) => {
+		if(index<arr.length-1) {
+			if(ref[item] === undefined) {
+				ref[item] = {};
+			}
 
-		[...group].forEach(closeGroup, this.el);
-	}
+			ref = ref[item];
+		} else {
+			if(Array.isArray(ref[item])) {
+				ref[item] = ref[item].concat(value);
+			} else {
+				if(ref[item] === undefined) {
+					ref[item] = value;
+				} else {
+					ref[item] = [ref[item], value];
+				}
+			}
+		}
+	});
 }
 
-function closeGroup(accordion) {
-	if(accordion !== this) {
-		accordion.classList.remove('is-open');
-	}
-}
-
-register('accordion', Accordion);
+register('rich-table', RichTable);

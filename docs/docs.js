@@ -30,3 +30,4 @@ import 'boilerplate/components/lightbox';
 import 'boilerplate/components/slider';
 import 'boilerplate/components/video';
 import 'boilerplate/components/map';
+import 'boilerplate/components/rich-table';

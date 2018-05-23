@@ -2,13 +2,13 @@
 
 <div class="constrain">
 	{{#table}}
-	<form class="rich-table" action="/docs/rich-table" method="GET" data-component="richt-table" enctype='application/json'>
-		<table>
+	<form class="rich-table" action="/docs/rich-table" method="GET" data-component="rich-table" enctype='application/json'>
+		<table class="rich-table__table">
 			<thead class="rich-table__header">
 				<tr class="rich-table__header-row">
 					{{#header}}
-						<th class="rich-table__header-column">
-							<fieldset>
+						<th class="rich-table__header-column" data-key="{{key}}">
+							<fieldset class="rich-table__header-filter">
 								<legend class="rich-table__header-label">{{label}}</legend>
 								
 								<select class="rich-table__header-filter" name="filter[{{key}}][]" multiple size="{{options.length}}">
@@ -31,10 +31,10 @@
 			<tbody>
 				{{#sort body @root.query.sort}}
 					{{#filter @root.query.filter}}
-					<tr>
-						<td>{{id}}</td>
-						<td>{{name}}</td>
-						<td>{{color}}</td>
+					<tr data-row>
+						<td data-cell>{{id}}</td>
+						<td data-cell>{{name}}</td>
+						<td data-cell>{{color}}</td>
 					</tr>
 					{{/filter}}
 				{{/sort}}
