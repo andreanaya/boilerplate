@@ -21,37 +21,12 @@
 	&.is-dragging {
 		[data-content] {
 			pointer-events: none;
+			transition: transform 0.5s $easeOutCubic;
 		}
 
-		.is-before, .is-after {
-			[data-content] {
-				transition: transform 0.5s $easeOutCubic;
-			}
-		}
-
-		[data-item-id] {
+		[data-item="current"] {
 			[data-content] {
 				visibility: hidden;
-			}
-		}
-
-		.is-over {
-			&.is-before, &.is-before ~ .is-before {
-				[data-content] {
-					transform: translateY(1em);
-				}
-			}
-		}
-
-		[data-item-id] ~ .is-after {
-			[data-content] {
-				transform: translateY(-1em);
-			}
-		}
-
-		.is-over ~ .is-after {
-			[data-content] {
-				transform: none;
 			}
 		}
 	}

@@ -3,53 +3,80 @@ import {register} from 'boilerplate/general/js/Factory.js';
 export default class DragList {
 	constructor(el) {
 		this.el = el;
-		[...el.querySelectorAll('[data-item]')].forEach((item) => {
+
+		this.onDragStart = onDragStart.bind(this);
+		this.onDragEnd = onDragEnd.bind(this);
+		this.onDragOver = onDragOver.bind(this);
+		this.onDragEnter = onDragEnter.bind(this);
+		this.onDragLeave = onDragLeave.bind(this);
+		this.onDrop = onDrop.bind(this);
+
+		this.items = [...this.el.querySelectorAll('[data-item]')];
+
+		this.items.forEach((item) => {
 			let content = item.querySelector('[data-content');
 			content.draggable = true;
-			content.addEventListener('dragstart', onDragStart.bind(this));
-			content.addEventListener('dragend', onDragEnd.bind(this));
+			content.addEventListener('dragstart', this.onDragStart);
+			content.addEventListener('dragend', this.onDragEnd);
 
-			item.addEventListener('dragover', onDragOver);
-			item.addEventListener('dragenter', onDragEnter);
-			item.addEventListener('dragleave', onDragLeave);
-			item.addEventListener('drop', onDrop);
+			item.addEventListener('dragover', this.onDragOver);
+			item.addEventListener('dragenter', this.onDragEnter);
+			item.addEventListener('dragleave', this.onDragLeave);
+			item.addEventListener('drop', this.onDrop);
+		});
+	}
+
+	dragStart() {
+		this.current = this.el.querySelector('[data-item="current"]');
+		this.offsetHeight = this.current.offsetHeight;
+		this.index = this.items.indexOf(this.current);
+	}
+
+	dragOver(el) {
+		let index = this.items.indexOf(el);
+
+		this.items.forEach((item, i) => {
+			if(index < this.index && i >= index && i < this.index) {
+				item.firstElementChild.style.transform = 'translateY('+(this.offsetHeight)+'px)';
+			} else if(index > this.index && i > this.index && i <= index) {
+				item.firstElementChild.style.transform = 'translateY(-'+(this.offsetHeight)+'px)';
+			} else {
+				item.firstElementChild.style.transform = '';
+			}
+		});
+	}
+
+	dragOut() {
+		console.log('out')
+		this.items.forEach((item, i) => {
+			item.firstElementChild.style.transform = '';
+		});
+	}
+
+	dragEnd() {
+		this.items.forEach((item, i) => {
+			item.firstElementChild.style.transform = '';
 		});
 	}
 }
 
 function onDragStart(e) {
-	let id = 'id-'+Date.now();
-	let item = e.currentTarget.parentNode;
-	let height = item.offsetHeight;
+	e.currentTarget.parentNode.dataset.item = 'current';
 
-	item.setAttribute('data-item-id', id);
-	e.dataTransfer.setData('item', id);
-
-	let items = [...this.el.querySelectorAll('[data-item]')];
-
-	let index = items.indexOf(e.currentTarget.parentNode);
-
-	items.forEach((item, i) => {
-		item.style.fontSize = height+'px';
-		if(i < index) {
-			item.classList.add('is-before');
-		} else if(i > index) {
-			item.classList.add('is-after');
-		}
-	})
-
-	requestAnimationFrame(function() {
-		this.classList.add('is-dragging');
-	}.bind(this.el));
+	requestAnimationFrame(() => {
+		this.el.classList.add('is-dragging');
+		this.dragStart();
+	});
 }
 
 function onDragEnd(e) {
-	e.currentTarget.parentNode.removeAttribute('data-item-id');
 	this.el.classList.remove('is-dragging');
 
-	[...this.el.querySelectorAll('[data-item]')].forEach((item) => {
-		item.classList.remove('is-before', 'is-after');
+	this.items.forEach((el) => {
+		el.dataset.item = '';
 	})
+
+	this.dragEnd();
 }
 
 
@@ -58,24 +85,33 @@ function onDragOver(e) {
 }
 
 function onDragEnter(e) {
-	e.currentTarget.classList.add('is-over');
+	if(e.currentTarget.dataset.item != 'current') {
+		e.currentTarget.dataset.item = 'over';
+	}
+
+	let list = this.el.querySelectorAll('[data-item="over"]');
+	if(list.length == 1) this.dragOver(list[0]);
 }
 
 function onDragLeave(e) {
-	e.currentTarget.classList.remove('is-over');
+	if(e.currentTarget.dataset.item != 'current') {
+		e.currentTarget.dataset.item = '';
+	}
+
+	
+	let list = this.el.querySelectorAll('[data-item="over"]');
+	if(list.length == 1) this.dragOver(list[0]);
+	if(list.length == 0) this.dragOut();
 }
 
 function onDrop(e) {
-	let id = e.dataTransfer.getData('item');
-	let item = document.querySelector('[data-item-id="'+id+'"]');
+	let item = this.el.querySelector('[data-item="current"]');
 
 	let target = e.currentTarget;
 
-	target.classList.remove('is-over');
+	target.dataset.item = "over";
 
-	let items = [...target.parentNode.querySelectorAll('[data-item]')];
-
-	if(items.indexOf(item) < items.indexOf(target)) {
+	if(this.items.indexOf(item) < this.items.indexOf(target)) {
 		let next = target.nextElementSibling;
 		
 		if(next) {
@@ -87,6 +123,7 @@ function onDrop(e) {
 		target.parentNode.insertBefore(item, target);
 	}
 
+	this.items = [...this.el.querySelectorAll('[data-item]')];
 }
 
 register('drag-list', DragList);
