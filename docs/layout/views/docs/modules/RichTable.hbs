@@ -2,13 +2,14 @@
 
 <div class="constrain">
 	{{#table}}
-	<form class="rich-table" action="/docs/rich-table" method="GET" data-component="rich-table" enctype='application/json'>
+	<div class="rich-table" data-component="rich-table">
+		<form class="rich-table__form" action="/docs/rich-table" method="GET" enctype='application/json' id="rich-table"></form>
 		<table class="rich-table__table">
 			<thead class="rich-table__header">
 				<tr class="rich-table__header-row">
 					{{#header}}
 						<th class="rich-table__header-column" data-key="{{key}}">
-							<fieldset class="rich-table__header-filter">
+							<fieldset class="rich-table__header-filter" form="rich-table">
 								<legend class="rich-table__header-label">{{label}}</legend>
 								
 								<select class="rich-table__header-filter" name="filter[{{key}}][]" multiple size="{{options.length}}">
@@ -21,25 +22,23 @@
 									{{/options}}
 								</select>
 
-								<button type="submit" name="sort[{{key}}]" value="true">Acending</button>
-								<button type="submit" name="sort[{{key}}]" value="false">Descending</button>
+								<button type="submit" form="rich-table" name="sort[{{key}}]" value="true">Acending</button>
+								<button type="submit" form="rich-table" name="sort[{{key}}]" value="false">Descending</button>
 							</fieldset>
 						</th>
 					{{/header}}
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="rich-table__body" {{#@root.query.sort}}data-sort="{{object this}}"{{/@root.query.sort}}>
 				{{#sort body @root.query.sort}}
-					{{#filter @root.query.filter}}
-					<tr data-row>
-						<td data-cell>{{id}}</td>
-						<td data-cell>{{name}}</td>
-						<td data-cell>{{color}}</td>
+					<tr class="rich-table__body-row {{^filter @root.query.filter}}is-hidden{{/filter}}" data-row>
+						<td data-col data-key="id" data-value="{{id}}">{{id}}</td>
+						<td data-col data-key="name" data-value="{{name}}">{{name}}</td>
+						<td data-col data-key="color" data-value="{{color}}">{{color}}</td>
 					</tr>
-					{{/filter}}
 				{{/sort}}
 			</tbody>
 		</table>
-	</form>
+	</div>
 	{{/table}}
 </div>

@@ -1,4 +1,5 @@
 import {register} from 'boilerplate/general/js/Factory.js';
+import {jsonAttribute} from 'boilerplate/general/js/Utils.js';
 
 export default class Map {
 	constructor(el) {
@@ -16,13 +17,13 @@ export default class Map {
 		let bounds = new google.maps.LatLngBounds();
 
 		if(this.el.dataset.center !== 'auto') {
-			bounds.extend(JSON.parse(this.el.dataset.center.replace(/([{,]\s?)([^:{,]*):([^,}]*)/gim, "$1\"$2\":$3")));
+			bounds.extend(JSON.parse(jsonAttribute(this.el.dataset.center)));
 		}
 		
 		this.map = new google.maps.Map(this.el);
 
 		if(this.el.dataset.markers) {
-			let markers = JSON.parse(this.el.dataset.markers.replace(/([{,]\s?)([^:{,]*):([^,}]*)/gim, "$1\"$2\":$3"));
+			let markers = JSON.parse(jsonAttribute(this.el.dataset.markers));
 
 			markers.forEach((coords) => {
 				let marker = new google.maps.Marker({

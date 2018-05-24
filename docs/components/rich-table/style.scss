@@ -2,9 +2,13 @@
 	display: block;
 	position: relative;
 	
+	&__form {
+		display: none;
+	}
+
 	&__header {
 		&-row {
-		
+			
 		}
 
 		&-column {
@@ -32,6 +36,14 @@
 
 			&:first-child {
 				border-top: none;
+			}
+		}
+	}
+
+	&__body {
+		&-row {
+			&.is-hidden {
+				display: none;
 			}
 		}
 	}
