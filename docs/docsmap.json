@@ -202,6 +202,13 @@
 			"data": "boilerplate/docs/models/rich-table.json"
 		},
 		{
+			"path": "drag-list",
+			"basePath": "boilerplate/docs/layout/docs",
+			"meta": {},
+			"template": "boilerplate/docs/layout/views/docs/modules/DragList.hbs",
+			"data": "boilerplate/docs/models/drag-list.json"
+		},
+		{
 			"path": "styleguide",
 			"basePath": "boilerplate/docs/layout/docs",
 			"meta": {},

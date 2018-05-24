@@ -1,0 +1,58 @@
+@import '~settings';
+
+.drag-list {
+	[data-item] {
+		display: block;
+		position: relative;
+	}
+
+	[data-content]{
+		display: block;
+		position: relative;
+		margin: 0;
+		padding: 10px;
+	}
+
+	p {
+		font-size: 16px;
+		margin: 0;
+	}
+
+	&.is-dragging {
+		[data-content] {
+			pointer-events: none;
+		}
+
+		.is-before, .is-after {
+			[data-content] {
+				transition: transform 0.5s $easeOutCubic;
+			}
+		}
+
+		[data-item-id] {
+			[data-content] {
+				visibility: hidden;
+			}
+		}
+
+		.is-over {
+			&.is-before, &.is-before ~ .is-before {
+				[data-content] {
+					transform: translateY(1em);
+				}
+			}
+		}
+
+		[data-item-id] ~ .is-after {
+			[data-content] {
+				transform: translateY(-1em);
+			}
+		}
+
+		.is-over ~ .is-after {
+			[data-content] {
+				transform: none;
+			}
+		}
+	}
+}

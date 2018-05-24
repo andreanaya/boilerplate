@@ -10,6 +10,7 @@ import './components/cookie-bar';
 import './components/video';
 import './components/map';
 import './components/rich-table';
+import './components/drag-list';
 
 //Components
 import 'boilerplate/components/accordion';
@@ -31,3 +32,4 @@ import 'boilerplate/components/slider';
 import 'boilerplate/components/video';
 import 'boilerplate/components/map';
 import 'boilerplate/components/rich-table';
+import 'boilerplate/components/drag-list';
