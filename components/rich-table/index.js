@@ -31,6 +31,8 @@ export default class RichTable {
 		if(query.sort) {
 			this.sort = query.sort;
 			this.descending = query[query.sort] === 'true';
+		} else {
+			this.sort = undefined;
 		}
 
 		this.data.sort((a, b) => {
@@ -42,18 +44,20 @@ export default class RichTable {
 				return 0;
 			}
 		}).forEach((item) => {
-			let keys = Object.keys(query.filter || {});
-
 			let filter = true;
+			
+			if(query.filter !== undefined) {
+				let keys = Object.keys(query.filter);
 
-			if(this.el.dataset.filter === 'every') {
-				filter = keys.filter((key) => {
-					return query.filter[key].indexOf(item[key]) > -1;
-				}).length == keys.length;
-			} else {
-				filter = keys.filter((key) => {
-					return query.filter[key].indexOf(item[key]) > -1;
-				}).length > 0;
+				if(this.el.dataset.filter === 'every') {
+					filter = keys.filter((key) => {
+						return query.filter[key].indexOf(item[key]) > -1;
+					}).length == keys.length;
+				} else {
+					filter = keys.filter((key) => {
+						return query.filter[key].indexOf(item[key]) > -1;
+					}).length > 0;
+				}
 			}
 
 			if(filter) {

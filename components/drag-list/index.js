@@ -49,7 +49,6 @@ export default class DragList {
 	}
 
 	dragOut() {
-		console.log('out')
 		this.items.forEach((item, i) => {
 			item.firstElementChild.style.transform = '';
 		});
