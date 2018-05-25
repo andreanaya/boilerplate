@@ -4,22 +4,21 @@ import {jsonAttribute} from 'boilerplate/general/js/Utils.js';
 export default class RichTable {
 	constructor(el) {
 		this.el = el;
-		this.form = this.el.querySelector('form');
 		this.table = this.el.querySelector('tbody');
 
 		this.onClick = onClick.bind(this);
 
-		[...this.el.querySelectorAll('[type="submit"]')].forEach((button)=> {
+		[...this.el.querySelectorAll('[type="checkbox"], [type="radio"]')].forEach((button)=> {
 			button.addEventListener('click', this.onClick);
 		});
 
-		this.sort = this.table.dataset.sort? JSON.parse(jsonAttribute(this.table.dataset.sort)) : undefined;
+		this.sort = this.el.dataset.sort? this.el.dataset.sort === 'true' : undefined;
+		this.descending = this.el.dataset.descending ? true : false;
 
 		this.data = [...this.table.querySelectorAll('[data-row]')].map((row) => {
 			return [...row.querySelectorAll('[data-col]')].reduce((data, el) => {
 				if(this.sort === undefined) {
-					this.sort = {};
-					this.sort[el.dataset.key] = true;
+					this.sort = el.dataset.key;
 				}
 
 				data[el.dataset.key] = el.dataset.value;
@@ -31,31 +30,38 @@ export default class RichTable {
 	render(query) {
 		if(query.sort) {
 			this.sort = query.sort;
+			this.descending = query[query.sort] === 'true';
 		}
 
-		var key = Object.keys(this.sort).pop();
-		var order = this.sort[key].toString() === 'true';
-
-		this.data.sort(function(a, b) {
-			if(a[key] > b[key]) {
-				return order?1:-1;
-			} else if(a[key] < b[key]) {
-				return order?-1:1;
+		this.data.sort((a, b) => {
+			if(a[this.sort] > b[this.sort]) {
+				return this.descending?-1:1;
+			} else if(a[this.sort] < b[this.sort]) {
+				return this.descending?1:-1;
 			} else {
 				return 0;
 			}
 		}).forEach((item) => {
-			let keys = Object.keys(query.filter || []);
+			let keys = Object.keys(query.filter || {});
 
-			if(query.filter === undefined || keys.filter((key) => {
-				return query.filter[key].indexOf(item[key]) > -1;
-			}).length == keys.length) {
+			let filter = true;
+
+			if(this.el.dataset.filter === 'every') {
+				filter = keys.filter((key) => {
+					return query.filter[key].indexOf(item[key]) > -1;
+				}).length == keys.length;
+			} else {
+				filter = keys.filter((key) => {
+					return query.filter[key].indexOf(item[key]) > -1;
+				}).length > 0;
+			}
+
+			if(filter) {
 				item.el.classList.remove('is-hidden');
 			} else {
 				item.el.classList.add('is-hidden');
 			}
 
-			// return options.inverse(this);
 			this.table.appendChild(item.el);
 		})
 	}
@@ -94,17 +100,13 @@ function processKey(data, key, value) {
 }
 
 function onClick(e) {
-	let filter = {};
+	let query = {};
 
-	[...this.el.querySelectorAll('option')].forEach((option) => {
-		if(option.selected) processKey(filter, option.parentNode.name, option.value);
+	[...this.el.querySelectorAll('[type="checkbox"], [type="radio"]')].forEach((filter) => {
+		if(filter.checked) processKey(query, filter.name, filter.value);
 	})
 
-	processKey(filter, e.currentTarget.name, e.currentTarget.value);
-
-	this.render(filter);
-	
-	e.preventDefault();
+	this.render(query);
 }
 
 register('rich-table', RichTable);

@@ -2,36 +2,47 @@
 
 <div class="constrain">
 	{{#table}}
-	<div class="rich-table" data-component="rich-table">
-		<form class="rich-table__form" action="/docs/rich-table" method="GET" enctype='application/json' id="rich-table"></form>
+	<div class="rich-table"
+		data-component="rich-table"
+		data-filter="some"
+		{{#@root.query.sort}}data-sort="{{this}}"{{/@root.query.sort}}
+		{{#if (lookup @root.query @root.query.sort)}}data-descending{{/if}}
+	>
+		<form class="rich-table__form" action="/docs/rich-table" method="GET" enctype='application/json' id="rich-table">
+			<button type="submit">Filter</button>
+		</form>
 		<table class="rich-table__table">
 			<thead class="rich-table__header">
 				<tr class="rich-table__header-row">
 					{{#header}}
 						<th class="rich-table__header-column" data-key="{{key}}">
-							<fieldset class="rich-table__header-filter" form="rich-table">
-								<legend class="rich-table__header-label">{{label}}</legend>
-								
-								<select class="rich-table__header-filter" name="filter[{{key}}][]" multiple size="{{options.length}}">
-									{{#options}}
-										{{#contains (lookup @root.query.filter ../key) value}}
-											<option class="rich-table__header-option" value="{{value}}" selected>{{label}}</option>
-										{{else}}
-											<option class="rich-table__header-option" value="{{value}}">{{label}}</option>
-										{{/contains}}
-									{{/options}}
-								</select>
+							<div class="rich-table__header-label">{{label}}</div>
+							
+							{{#options}}
+								<label class="rich-table__header-option">
+									<input type="checkbox" form="rich-table" name="filter[{{../key}}][]" value="{{value}}" {{#contains (lookup @root.query.filter ../key) value}}checked{{/contains}}/>
+									{{label}}
+								</label>
+							{{/options}}
+							
+							<label>
+								<input type="radio" form="rich-table" name="sort" value="{{key}}" {{#if_eq @root.query.sort key}}checked{{/if_eq}}/>
+								Sort by {{key}}
+							</label>
 
-								<button type="submit" form="rich-table" name="sort[{{key}}]" value="true">Acending</button>
-								<button type="submit" form="rich-table" name="sort[{{key}}]" value="false">Descending</button>
-							</fieldset>
+							<label>
+								<input type="checkbox" form="rich-table" name="{{key}}" value="true" {{#if_eq @root.query.sort key}}{{#if (lookup @root.query key)}}checked{{/if}}{{/if_eq}} />
+								Descending
+							</label>
+							<!-- <button type="submit" form="rich-table" name="sort[{{key}}]" value="true">Acending</button>
+							<button type="submit" form="rich-table" name="sort[{{key}}]" value="false">Descending</button> -->
 						</th>
 					{{/header}}
 				</tr>
 			</thead>
-			<tbody class="rich-table__body" {{#@root.query.sort}}data-sort="{{object this}}"{{/@root.query.sort}}>
-				{{#sort body @root.query.sort}}
-					<tr class="rich-table__body-row {{^filter @root.query.filter}}is-hidden{{/filter}}" data-row>
+			<tbody class="rich-table__body">
+				{{#sort body @root.query.sort (lookup @root.query @root.query.sort) }}
+					<tr class="rich-table__body-row {{^filter this @root.query.filter 'some'}}is-hidden{{/filter}}" data-row>
 						<td data-col data-key="id" data-value="{{id}}">{{id}}</td>
 						<td data-col data-key="name" data-value="{{name}}">{{name}}</td>
 						<td data-col data-key="color" data-value="{{color}}">{{color}}</td>

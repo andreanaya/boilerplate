@@ -3,7 +3,7 @@
 	position: relative;
 	
 	&__form {
-		display: none;
+		// display: none;
 	}
 
 	&__header {
@@ -12,7 +12,7 @@
 		}
 
 		&-column {
-
+			
 		}
 
 		&-label {
@@ -23,7 +23,6 @@
 			display: block;
 			position: relative;
 			width: 100%;
-			border: 1px solid #ccc;
 		}
 
 		&-option {
