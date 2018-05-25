@@ -11,11 +11,11 @@
 		<form class="rich-table__form" action="/docs/rich-table" method="GET" enctype='application/json' id="rich-table">
 			<button type="submit">Filter</button>
 		</form>
-		<table class="rich-table__table">
-			<thead class="rich-table__header">
+		<table class="rich-table__table" data-sticky-container>
+			<thead class="rich-table__header" data-component="sticky-element">
 				<tr class="rich-table__header-row">
 					{{#header}}
-						<th class="rich-table__header-column" data-key="{{key}}">
+						<th class="rich-table__header-col" data-key="{{key}}">
 							<div class="rich-table__header-label">{{label}}</div>
 							
 							{{#options}}
@@ -25,12 +25,12 @@
 								</label>
 							{{/options}}
 							
-							<label>
+							<label class="rich-table__header-option">
 								<input type="radio" form="rich-table" name="sort" value="{{key}}" {{#if_eq @root.query.sort key}}checked{{/if_eq}}/>
 								Sort by {{key}}
 							</label>
 
-							<label>
+							<label class="rich-table__header-option">
 								<input type="checkbox" form="rich-table" name="{{key}}" value="true" {{#if_eq @root.query.sort key}}{{#if (lookup @root.query key)}}checked{{/if}}{{/if_eq}} />
 								Descending
 							</label>
@@ -43,13 +43,24 @@
 			<tbody class="rich-table__body">
 				{{#sort body @root.query.sort (lookup @root.query @root.query.sort) }}
 					<tr class="rich-table__body-row {{^filter this @root.query.filter 'some'}}is-hidden{{/filter}}" data-row>
-						<td data-col data-key="id" data-value="{{id}}">{{id}}</td>
-						<td data-col data-key="name" data-value="{{name}}">{{name}}</td>
-						<td data-col data-key="color" data-value="{{color}}">{{color}}</td>
+						<td class="rich-table__body-col" data-col data-key="id" data-value="{{id}}">{{id}}</td>
+						<td class="rich-table__body-col" data-col data-key="name" data-value="{{name}}">{{name}}</td>
+						<td class="rich-table__body-col" data-col data-key="color" data-value="{{color}}">{{color}}</td>
 					</tr>
 				{{/sort}}
 			</tbody>
 		</table>
 	</div>
 	{{/table}}
+
+	<div class="grid">
+		{{#for 1 12}}
+			<div class="cell span-6 span-4--tablet span-3--desktop span-2--wide">
+				<div class="bg-pink squared"></div>
+			</div>
+			<div class="cell span-6 span-4--tablet span-3--desktop span-2--wide">
+				<div class="bg-blue squared"></div>
+			</div>
+		{{/for}}
+	</div>
 </div>

@@ -6,13 +6,23 @@
 		// display: none;
 	}
 
+	&__table {
+		display: table;
+		width: 100%;
+	}
+
 	&__header {
+		display: table;
+		width: 100%;
+
 		&-row {
-			
+			display: flex;
+			width: 100%;
 		}
 
-		&-column {
-			
+		&-col {
+			flex-basis: 0;
+			flex-grow: 1;
 		}
 
 		&-label {
@@ -40,10 +50,23 @@
 	}
 
 	&__body {
+		width: 100%;
+		
 		&-row {
+			display: flex;
+			width: 100%;
+
 			&.is-hidden {
 				display: none;
 			}
+		}
+
+		&-col {
+			flex-basis: 0;
+			flex-grow: 1;
+
+			padding: 10px;
+			border: 1px solid #ccc;
 		}
 	}
 }
