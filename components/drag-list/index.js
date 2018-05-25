@@ -17,19 +17,21 @@ export default class DragList {
 			let content = item.querySelector('[data-content');
 			content.draggable = true;
 			content.addEventListener('dragstart', this.onDragStart);
-			content.addEventListener('dragend', this.onDragEnd);
 
-			item.addEventListener('dragover', this.onDragOver);
 			item.addEventListener('dragenter', this.onDragEnter);
 			item.addEventListener('dragleave', this.onDragLeave);
 			item.addEventListener('drop', this.onDrop);
 		});
+
+		this.el.addEventListener('dragover', this.onDragOver);
 	}
 
 	dragStart() {
 		this.current = this.el.querySelector('[data-item="current"]');
 		this.offsetHeight = this.current.offsetHeight;
 		this.index = this.items.indexOf(this.current);
+
+		this.el.addEventListener('dragend', this.onDragEnd);
 	}
 
 	dragOver(el) {
@@ -74,7 +76,9 @@ function onDragEnd(e) {
 
 	this.items.forEach((el) => {
 		el.dataset.item = '';
-	})
+	});
+
+	this.el.removeEventListener('dragend', this.onDragEnd);
 
 	this.dragEnd();
 }
@@ -98,7 +102,6 @@ function onDragLeave(e) {
 		e.currentTarget.dataset.item = '';
 	}
 
-	
 	let list = this.el.querySelectorAll('[data-item="over"]');
 	if(list.length == 1) this.dragOver(list[0]);
 	if(list.length == 0) this.dragOut();
@@ -124,6 +127,8 @@ function onDrop(e) {
 	}
 
 	this.items = [...this.el.querySelectorAll('[data-item]')];
+
+	this.onDragEnd();
 }
 
 register('drag-list', DragList);
