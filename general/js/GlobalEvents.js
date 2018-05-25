@@ -43,7 +43,7 @@ function resize() {
 			}));
 		}
 	}
-
+	
 	document.body.emit(new CustomEvent('resize'));
 }
 
@@ -82,4 +82,6 @@ subscribe('app:init', () => {
 
 	window.addEventListener('resize', onResize);
 	window.addEventListener('scroll', onScroll);
+
+	window.requestAnimationFrame(resize);
 });

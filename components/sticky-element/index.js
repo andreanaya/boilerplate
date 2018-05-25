@@ -1,10 +1,7 @@
 import {subscribe} from 'boilerplate/general/js/EventSystem.js';
 import {register} from 'boilerplate/general/js/Factory.js';
 
-let containers = [],
-	isScrolling = false,
-	isResizing = false,
-	scrollPos;
+let map = new WeakMap();
 
 export default class StickyElement {
 	constructor(el) {
@@ -32,21 +29,13 @@ export default class StickyElement {
 		let marginTop = parseInt(el.dataset.stickyTop) || 0;
 		let marginBottom = parseInt(el.dataset.stickyBottom) || 0;
 
-		let item = containers.filter(function(item) {
-			return item.parent == parent;
-		})[0];
-
-
-		if(item === undefined) {
-			item = {
-				parent: parent,
-				elements: []
-			};
-
-			containers.push(item);
+		if(!map.has(parent)) {
+			map.set(parent, []);
+			parent.subscribe('scroll', onScroll);
+			parent.subscribe('resize', onResize);
 		}
 
-		item.elements.push({
+		map.get(parent).push({
 			el: el,
 			parent: parent,
 			placeholder: placeholder,
@@ -62,13 +51,7 @@ export default class StickyElement {
 			marginBottom: marginBottom,
 			offset: 0,
 		});
-		
 	}
-}
-
-function setup(el) {
-	el.classList.add('js-initied');
-
 }
 
 function resizeItems(item) {
@@ -120,7 +103,7 @@ function mapItems(item, index, list) {
 	}
 }
 
-function check(item) {
+function check(item, speed) {
 	let pageYOffset = window.pageYOffset;
 
 	if(item.disabled) pageYOffset = 0;
@@ -128,7 +111,7 @@ function check(item) {
 	let diff = Math.max(item.bounds.height-window.innerHeight, 0);
 
 	if(diff > 0) {
-		item.offset += item.parent.__freeze__ === true ? 0 : (scrollPos - pageYOffset);
+		item.offset -= speed;
 
 		if(item.offset < -diff) item.offset = -diff;
 		if(item.offset > 0) item.offset = 0;
@@ -167,56 +150,20 @@ function check(item) {
 	}
 }
 
-function scroll() {
-	let scrollTop = pageYOffset;
-
-	isScrolling = false;
-
-
-	containers.forEach(function(item) {
-		item.elements.forEach(check);
-	});
-
-	scrollPos = pageYOffset;
-}
-
-function resize() {
-	scrollPos = pageYOffset;
-
-	containers.forEach(function(item) {
-		item.elements.forEach(resizeItems);
-		item.elements.sort(sortItems);
-		item.elements.forEach(mapItems);
-	});
-
-	isResizing = false;
-	
-	scroll();
-}
-
 function onScroll(e) {
-	scroll();
-	// if(!isScrolling) {
-	// 	isScrolling = true;
-	// 	window.requestAnimationFrame(scroll);
-	// }
+	let elements = map.get(e.currentTarget);
+	
+	elements.forEach((item) => check(item, e.detail.speed));
 }
 
 function onResize(e) {
-	resize();
-	// if(!isResizing) {
-	// 	isResizing = true;
-	// 	window.requestAnimationFrame(resize);
-	// }
+	let elements = map.get(e.currentTarget);
+	
+	elements.forEach(resizeItems);
+	elements.sort(sortItems);
+	elements.forEach(mapItems);
+
+	elements.forEach((item) => check(item, 0));
 }
-
-subscribe('app:init', () => {
-	scrollPos = pageYOffset;
-
-	resize();
-
-	window.addEventListener('scroll', onScroll);
-	window.addEventListener('resize', onResize);
-});
 
 register('sticky-element', StickyElement);
