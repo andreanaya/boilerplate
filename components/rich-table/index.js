@@ -1,5 +1,4 @@
 import {register} from 'boilerplate/general/js/Factory.js';
-import {jsonAttribute} from 'boilerplate/general/js/Utils.js';
 
 export default class RichTable {
 	constructor(el) {
@@ -111,6 +110,8 @@ function onClick(e) {
 	})
 
 	this.render(query);
+
+	this.el.emit(new CustomEvent('resize'));
 }
 
 register('rich-table', RichTable);

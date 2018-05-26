@@ -124,6 +124,10 @@ function check(item, speed) {
 		item.el.style.width = item.bounds.width+'px';
 		item.el.style.marginTop = '0';
 		item.el.style.zIndex = '1';
+
+		item.placeholder.style.display = 'block';
+		item.placeholder.style.width = item.bounds.width+'px';
+		item.placeholder.style.height = item.bounds.height+'px';
 	} else if(pageYOffset > item.bounds.top-item.marginTop) {
 		item.el.style.position = 'fixed';
 		item.el.style.top = item.offset+'px';
