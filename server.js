@@ -13,15 +13,21 @@ var webpackHotMiddleware = require("webpack-hot-middleware");
 var configPath = path.resolve('./config/server.json');
 var config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 var configWebpack = require('./webpack.config.js')();
+var defaultHelpers = require(path.resolve('./boilerplate/general/js/HBSHelpers.js'));
+
 
 function templates(config) {
 	var basedir = path.resolve(config.basedir);
 
-	if(config.helpers) {
-		var helpers = require(basedir+'/'+config.helpers);
+	Object.keys(defaultHelpers).forEach(function(key) {
+		handlebars.registerHelper(key, defaultHelpers[key]);
+	});
 
-		Object.keys(helpers).forEach(function(key) {
-			handlebars.registerHelper(key, helpers[key]);
+	if(config.helpers) {
+		var appHelpers = require(basedir+'/'+config.helpers);
+		
+		Object.keys(appHelpers).forEach(function(key) {
+			handlebars.registerHelper(key, appHelpers[key]);
 		});
 	}
 
